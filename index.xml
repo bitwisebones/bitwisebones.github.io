@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>ascii graves</title>
-    <link>https://asciigraves.net/</link>
+    <link>/</link>
     <description>Recent content on ascii graves</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 23 Jan 2024 12:05:48 -0500</lastBuildDate><atom:link href="https://asciigraves.net/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 23 Jan 2024 12:05:48 -0500</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Personal PC Setup</title>
-      <link>https://asciigraves.net/posts/personal-pc-setup/</link>
+      <link>/posts/personal-pc-setup/</link>
       <pubDate>Tue, 23 Jan 2024 12:05:48 -0500</pubDate>
       
-      <guid>https://asciigraves.net/posts/personal-pc-setup/</guid>
+      <guid>/posts/personal-pc-setup/</guid>
       <description>I&amp;rsquo;ve had many different PC setups throughout the years. Here are some that I was able to find pictures of, starting with my first post-college apartment in 2012. Prior to college, my family had a few various Packard Bell, Gateway, and Dell desktops.
 2012 Ikea desk, 23 inch HP monitor, 14 inch HP laptop
 2014 Different Ikea desk, same HP monitor, first mechanical keyboard (Cherry MX Blue switches), Not pictured: new desktop PC with an 🌟SSD🌟</description>
@@ -40,10 +40,10 @@
     
     <item>
       <title>Work PC Setup</title>
-      <link>https://asciigraves.net/posts/work-pc-setup/</link>
+      <link>/posts/work-pc-setup/</link>
       <pubDate>Tue, 23 Jan 2024 12:05:48 -0500</pubDate>
       
-      <guid>https://asciigraves.net/posts/work-pc-setup/</guid>
+      <guid>/posts/work-pc-setup/</guid>
       <description>Here&amp;rsquo;s a brief look at my various workstations throughout my career.
 2012 My very first tech job working for the college I attended&amp;hellip;in a closet in the basement of a building on campus. Mostly performed maintenance on the college&amp;rsquo;s public and private websites which were built with WebForms in VB.
 2013 First job out of college was a small marketing agency that was trying to transition from print to web. It was also a Mac shop.</description>
@@ -68,10 +68,10 @@
     
     <item>
       <title>About</title>
-      <link>https://asciigraves.net/about/</link>
+      <link>/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://asciigraves.net/about/</guid>
+      <guid>/about/</guid>
       <description>Above: my professional portrait
 Find Me GitHub: bitwisebones Mastodon: bitwisebones Email: bitwisebones at gmail Work Over the last decade as a professional developer, I&amp;rsquo;ve worked on many different types of applications, including:
 CMS-managed websites Ecommerce Real-time distributed systems LOB/ERP Mobile And I&amp;rsquo;ve used a variety of technologies, including:
