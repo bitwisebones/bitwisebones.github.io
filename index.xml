@@ -6,7 +6,37 @@
     <description>Recent content on ascii graves</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 23 Jan 2024 12:05:48 -0500</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 29 Feb 2024 06:00:00 -0500</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>NuVu Meter</title>
+      <link>/posts/nuvu-meter/</link>
+      <pubDate>Thu, 29 Feb 2024 06:00:00 -0500</pubDate>
+      
+      <guid>/posts/nuvu-meter/</guid>
+      <description>I had a few salvaged VU meters burning a hole in my proverbial pocket, so I decided to turn one into a readout for my home&amp;rsquo;s energy usage.
+At a high level, I have an Emporia Vue 2 that publishes energy readings to a self-hosted MQTT server (this is not default behavior and required flashing custom config to the device). My self-hosted NodeRed instance listens for those messages, extracts the relevant data, and issues a new message with the total point-in-time energy usage as a percentage of the last day&amp;rsquo;s max usage (it also saves all of the data so I can view it in Grafana).</description>
+      <content>&lt;p&gt;I had a few salvaged VU meters burning a hole in my proverbial pocket, so I decided to turn one into a readout for my home&amp;rsquo;s energy usage.&lt;/p&gt;
+&lt;p&gt;At a high level, I have an &lt;a href=&#34;https://shop.emporiaenergy.com/products/gen-2-emporia-vue-with-16-sensors-bundle&#34;&gt;Emporia Vue 2&lt;/a&gt; that publishes energy readings to a self-hosted MQTT server (this is not default behavior and required flashing custom config to the device). My self-hosted NodeRed instance listens for those messages, extracts the relevant data, and issues a new message with the total point-in-time energy usage as a percentage of the last day&amp;rsquo;s max usage (it also saves all of the data so I can view it in Grafana). A Raspberry Pi Pico W in the NuVu meter listens for those messages and then changes the needle position and backlight color accordingly.&lt;/p&gt;
+&lt;h2 id=&#34;hardware&#34;&gt;Hardware&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;exploded-view.png&#34; alt=&#34;An exploded view of the various pieces of the nuvu meter&#34;&gt;&lt;/p&gt;
+&lt;p&gt;The main inspiration for this project was an old VU meter I had scavenged from a tape deck, so that&amp;rsquo;s what dictated the form factor of the final product.&lt;/p&gt;
+&lt;p&gt;The electronics are very minimal - a Raspberry Pi Pico W (powered via USB) drives the RGB LED and the VU meter via PWM, and that&amp;rsquo;s all there is to it.&lt;/p&gt;
+&lt;p&gt;I chose the Pico W because it was cheap and available. There are plenty of other options in this space that also would&amp;rsquo;ve worked just as well, like the ESP32 or any of the other WiFi dev boards sold by Adafruit or Seeed Studio.&lt;/p&gt;
+&lt;p&gt;When designing the case, I wanted something that didn&amp;rsquo;t add too much bulk to the VU meter&amp;rsquo;s footprint. You can&amp;rsquo;t see it too well in the photos, but the coil that moves the needle sits at the bottom center and sticks out the back about 10mm, so that&amp;rsquo;s why the Pico is located in the top half of the enclosure rather than closer to the bottom. I&amp;rsquo;m not entirely happy with how the USB cable sticks out from the middle of the case, but it doesn&amp;rsquo;t pose any functional issues so I&amp;rsquo;ll learn to live with it.&lt;/p&gt;
+&lt;p&gt;The mounting hole placement on the Pico is not the greatest. The holes near the USB port are so close to the edge of the PCB that it makes mounting difficult, which is how I ended up with the filler block that just sits on top of the PCB and around the USB port.&lt;/p&gt;
+&lt;p&gt;I had also originally planned (and even tried) to use heat set inserts for the holes in the back cover, but I&amp;rsquo;m really bad at installing those so I opted for undersized holes that the screws sort of just self tap. It probably won&amp;rsquo;t hold up to too many disassemble/reassemble operations, but hopefully I won&amp;rsquo;t ever need to take it apart.&lt;/p&gt;
+&lt;h2 id=&#34;software&#34;&gt;Software&lt;/h2&gt;
+&lt;p&gt;I originally started out using MicroPython to build a prototype and found the fast feedback loop absolutely wonderful. It was especially great for dialing in specific color values or needle positions.&lt;/p&gt;
+&lt;p&gt;That said, I wasn&amp;rsquo;t happy with the IDEs that were available, and I also struggled with confidently installing external packages (for MQTT). It seemed very easy for the code running on the device to get out of sync with the code on my host PC&amp;rsquo;s file system.&lt;/p&gt;
+&lt;p&gt;I considered a few alternatives and eventually landed on good ol&amp;rsquo; Arduino. It&amp;rsquo;s still not perfect (dependency management seems environmental and not based on a &amp;ldquo;project&amp;rdquo;), but I was more comfortable with the end result.&lt;/p&gt;
+&lt;p&gt;There&amp;rsquo;s only about 100 lines of really straightforward code. The &lt;code&gt;setup&lt;/code&gt; function configures output pins, connects to WiFi, connects to MQTT, and then registers a callback handler that runs when a message is received.&lt;/p&gt;
+&lt;p&gt;In response to a message, the callback parses the value received (0-100) and then modifies the needle position and LED color to reflect that value.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;parts.jpg&#34; alt=&#34;A deconstructed view of the NuVu meter&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;resources&#34;&gt;Resources&lt;/h2&gt;
+&lt;p&gt;The code, enclosure, and schematics are all on &lt;a href=&#34;https://github.com/bitwisebones/nuvu-meter&#34;&gt;Github&lt;/a&gt; in case you want to use them as inspiration for your own project.&lt;/p&gt;
+</content>
+    </item>
+    
     <item>
       <title>Personal PC Setup</title>
       <link>/posts/personal-pc-setup/</link>

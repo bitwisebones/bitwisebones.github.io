@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>NuVu Meter :: ascii graves</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="I had a few salvaged VU meters burning a hole in my proverbial pocket, so I decided to turn one into a readout for my home&amp;rsquo;s energy usage.
+At a high level, I have an Emporia Vue 2 that publishes energy readings to a self-hosted MQTT server (this is not default behavior and required flashing custom config to the device). My self-hosted NodeRed instance listens for those messages, extracts the relevant data, and issues a new message with the total point-in-time energy usage as a percentage of the last day&amp;rsquo;s max usage (it also saves all of the data so I can view it in Grafana)." />
+<meta name="keywords" content="" />
+
+  <meta name="robots" content="noodp" />
+
+<link rel="canonical" href="/posts/nuvu-meter/" />
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/styles.css">
+
+
+
+
+
+
+
+  <link rel="shortcut icon" href="/img/theme-colors/blue.png">
+  <link rel="apple-touch-icon" href="/img/theme-colors/blue.png">
+
+
+
+<meta name="twitter:card" content="summary" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="NuVu Meter">
+<meta property="og:description" content="I had a few salvaged VU meters burning a hole in my proverbial pocket, so I decided to turn one into a readout for my home&amp;rsquo;s energy usage.
+At a high level, I have an Emporia Vue 2 that publishes energy readings to a self-hosted MQTT server (this is not default behavior and required flashing custom config to the device). My self-hosted NodeRed instance listens for those messages, extracts the relevant data, and issues a new message with the total point-in-time energy usage as a percentage of the last day&amp;rsquo;s max usage (it also saves all of the data so I can view it in Grafana)." />
+<meta property="og:url" content="/posts/nuvu-meter/" />
+<meta property="og:site_name" content="ascii graves" />
+
+  
+  
+    
+  
+  <meta property="og:image" content="/posts/nuvu-meter/nuvu.jpg">
+
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+
+
+  <meta property="article:published_time" content="2024-02-29 06:00:00 -0500 -0500" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body class="blue">
+
+
+<div class="container center headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    ascii graves
+  </div>
+</a>
+
+    </div>
+    
+      <ul class="menu menu--mobile">
+  <li class="menu__trigger">Menu&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+      
+        
+          <li><a href="/about">About</a></li>
+        
+      
+        
+          <li><a href="/">Posts</a></li>
+        
+      
+        
+          <li><a href="/tags">Tags</a></li>
+        
+      
+      
+    </ul>
+  </li>
+</ul>
+
+    
+    
+  </div>
+  
+    <nav class="navigation-menu">
+  <ul class="navigation-menu__inner menu--desktop">
+    
+      
+        
+          <li><a href="/about" >About</a></li>
+        
+      
+        
+          <li><a href="/" >Posts</a></li>
+        
+      
+        
+          <li><a href="/tags" >Tags</a></li>
+        
+      
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+<article class="post">
+  <h1 class="post-title">
+    <a href="/posts/nuvu-meter/">NuVu Meter</a>
+  </h1>
+  <div class="post-meta"><time class="post-date">2024-02-29</time></div>
+
+  
+    <span class="post-tags">
+      
+      #<a href="/tags/iot/">iot</a>&nbsp;
+      
+      #<a href="/tags/electronics/">electronics</a>&nbsp;
+      
+    </span>
+  
+  
+  <img src="/posts/nuvu-meter/nuvu.jpg"
+    class="post-cover"
+    alt="NuVu Meter"
+    title="Cover Image" />
+
+
+  
+
+  <div class="post-content"><div>
+        <p>I had a few salvaged VU meters burning a hole in my proverbial pocket, so I decided to turn one into a readout for my home&rsquo;s energy usage.</p>
+<p>At a high level, I have an <a href="https://shop.emporiaenergy.com/products/gen-2-emporia-vue-with-16-sensors-bundle">Emporia Vue 2</a> that publishes energy readings to a self-hosted MQTT server (this is not default behavior and required flashing custom config to the device). My self-hosted NodeRed instance listens for those messages, extracts the relevant data, and issues a new message with the total point-in-time energy usage as a percentage of the last day&rsquo;s max usage (it also saves all of the data so I can view it in Grafana). A Raspberry Pi Pico W in the NuVu meter listens for those messages and then changes the needle position and backlight color accordingly.</p>
+<h2 id="hardware">Hardware<a href="#hardware" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p><img src="exploded-view.png" alt="An exploded view of the various pieces of the nuvu meter"></p>
+<p>The main inspiration for this project was an old VU meter I had scavenged from a tape deck, so that&rsquo;s what dictated the form factor of the final product.</p>
+<p>The electronics are very minimal - a Raspberry Pi Pico W (powered via USB) drives the RGB LED and the VU meter via PWM, and that&rsquo;s all there is to it.</p>
+<p>I chose the Pico W because it was cheap and available. There are plenty of other options in this space that also would&rsquo;ve worked just as well, like the ESP32 or any of the other WiFi dev boards sold by Adafruit or Seeed Studio.</p>
+<p>When designing the case, I wanted something that didn&rsquo;t add too much bulk to the VU meter&rsquo;s footprint. You can&rsquo;t see it too well in the photos, but the coil that moves the needle sits at the bottom center and sticks out the back about 10mm, so that&rsquo;s why the Pico is located in the top half of the enclosure rather than closer to the bottom. I&rsquo;m not entirely happy with how the USB cable sticks out from the middle of the case, but it doesn&rsquo;t pose any functional issues so I&rsquo;ll learn to live with it.</p>
+<p>The mounting hole placement on the Pico is not the greatest. The holes near the USB port are so close to the edge of the PCB that it makes mounting difficult, which is how I ended up with the filler block that just sits on top of the PCB and around the USB port.</p>
+<p>I had also originally planned (and even tried) to use heat set inserts for the holes in the back cover, but I&rsquo;m really bad at installing those so I opted for undersized holes that the screws sort of just self tap. It probably won&rsquo;t hold up to too many disassemble/reassemble operations, but hopefully I won&rsquo;t ever need to take it apart.</p>
+<h2 id="software">Software<a href="#software" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>I originally started out using MicroPython to build a prototype and found the fast feedback loop absolutely wonderful. It was especially great for dialing in specific color values or needle positions.</p>
+<p>That said, I wasn&rsquo;t happy with the IDEs that were available, and I also struggled with confidently installing external packages (for MQTT). It seemed very easy for the code running on the device to get out of sync with the code on my host PC&rsquo;s file system.</p>
+<p>I considered a few alternatives and eventually landed on good ol&rsquo; Arduino. It&rsquo;s still not perfect (dependency management seems environmental and not based on a &ldquo;project&rdquo;), but I was more comfortable with the end result.</p>
+<p>There&rsquo;s only about 100 lines of really straightforward code. The <code>setup</code> function configures output pins, connects to WiFi, connects to MQTT, and then registers a callback handler that runs when a message is received.</p>
+<p>In response to a message, the callback parses the value received (0-100) and then modifies the needle position and LED color to reflect that value.</p>
+<p><img src="parts.jpg" alt="A deconstructed view of the NuVu meter"></p>
+<h2 id="resources">Resources<a href="#resources" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>The code, enclosure, and schematics are all on <a href="https://github.com/bitwisebones/nuvu-meter">Github</a> in case you want to use them as inspiration for your own project.</p>
+
+      </div></div>
+
+  
+
+  
+    
+
+  
+</article>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2024 Powered by <a href="https://gohugo.io">Hugo</a></span>
+    
+      <span>:: <a href="https://github.com/panr/hugo-theme-terminal" target="_blank">Theme</a> made by <a href="https://github.com/panr" target="_blank">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+
+
+
+
+
+<script type="text/javascript" src="/bundle.min.js"></script>
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>
