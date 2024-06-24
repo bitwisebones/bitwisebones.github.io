@@ -18,7 +18,7 @@ At a high level, I have an Emporia Vue 2 that publishes energy readings to a sel
       <content>&lt;p&gt;I had a few salvaged VU meters burning a hole in my proverbial pocket, so I decided to turn one into a readout for my home&amp;rsquo;s energy usage.&lt;/p&gt;
 &lt;p&gt;At a high level, I have an &lt;a href=&#34;https://shop.emporiaenergy.com/products/gen-2-emporia-vue-with-16-sensors-bundle&#34;&gt;Emporia Vue 2&lt;/a&gt; that publishes energy readings to a self-hosted MQTT server (this is not default behavior and required flashing custom config to the device). My self-hosted NodeRed instance listens for those messages, extracts the relevant data, and issues a new message with the total point-in-time energy usage as a percentage of the last day&amp;rsquo;s max usage (it also saves all of the data so I can view it in Grafana). A Raspberry Pi Pico W in the NuVu meter listens for those messages and then changes the needle position and backlight color accordingly.&lt;/p&gt;
 &lt;h2 id=&#34;hardware&#34;&gt;Hardware&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&#34;exploded-view.png&#34; alt=&#34;An exploded view of the various pieces of the nuvu meter&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;exploded-view.webp&#34; alt=&#34;An exploded view of the various pieces of the nuvu meter&#34;&gt;&lt;/p&gt;
 &lt;p&gt;The main inspiration for this project was an old VU meter I had scavenged from a tape deck, so that&amp;rsquo;s what dictated the form factor of the final product.&lt;/p&gt;
 &lt;p&gt;The electronics are very minimal - a Raspberry Pi Pico W (powered via USB) drives the RGB LED and the VU meter via PWM, and that&amp;rsquo;s all there is to it.&lt;/p&gt;
 &lt;p&gt;I chose the Pico W because it was cheap and available. There are plenty of other options in this space that also would&amp;rsquo;ve worked just as well, like the ESP32 or any of the other WiFi dev boards sold by Adafruit or Seeed Studio.&lt;/p&gt;
@@ -31,7 +31,7 @@ At a high level, I have an Emporia Vue 2 that publishes energy readings to a sel
 &lt;p&gt;I considered a few alternatives and eventually landed on good ol&amp;rsquo; Arduino. It&amp;rsquo;s still not perfect (dependency management seems environmental and not based on a &amp;ldquo;project&amp;rdquo;), but I was more comfortable with the end result.&lt;/p&gt;
 &lt;p&gt;There&amp;rsquo;s only about 100 lines of really straightforward code. The &lt;code&gt;setup&lt;/code&gt; function configures output pins, connects to WiFi, connects to MQTT, and then registers a callback handler that runs when a message is received.&lt;/p&gt;
 &lt;p&gt;In response to a message, the callback parses the value received (0-100) and then modifies the needle position and LED color to reflect that value.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;parts.jpg&#34; alt=&#34;A deconstructed view of the NuVu meter&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;parts.webp&#34; alt=&#34;A deconstructed view of the NuVu meter&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;resources&#34;&gt;Resources&lt;/h2&gt;
 &lt;p&gt;The code, enclosure, and schematics are all on &lt;a href=&#34;https://github.com/bitwisebones/nuvu-meter&#34;&gt;Github&lt;/a&gt; in case you want to use them as inspiration for your own project.&lt;/p&gt;
 </content>

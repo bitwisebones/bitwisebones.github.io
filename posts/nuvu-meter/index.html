@@ -53,7 +53,7 @@ At a high level, I have an Emporia Vue 2 that publishes energy readings to a sel
   
     
   
-  <meta property="og:image" content="/posts/nuvu-meter/nuvu.jpg">
+  <meta property="og:image" content="/posts/nuvu-meter/nuvu.webp">
 
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="627">
@@ -157,7 +157,7 @@ At a high level, I have an Emporia Vue 2 that publishes energy readings to a sel
     </span>
   
   
-  <img src="/posts/nuvu-meter/nuvu.jpg"
+  <img src="/posts/nuvu-meter/nuvu.webp"
     class="post-cover"
     alt="NuVu Meter"
     title="Cover Image" />
@@ -169,7 +169,7 @@ At a high level, I have an Emporia Vue 2 that publishes energy readings to a sel
         <p>I had a few salvaged VU meters burning a hole in my proverbial pocket, so I decided to turn one into a readout for my home&rsquo;s energy usage.</p>
 <p>At a high level, I have an <a href="https://shop.emporiaenergy.com/products/gen-2-emporia-vue-with-16-sensors-bundle">Emporia Vue 2</a> that publishes energy readings to a self-hosted MQTT server (this is not default behavior and required flashing custom config to the device). My self-hosted NodeRed instance listens for those messages, extracts the relevant data, and issues a new message with the total point-in-time energy usage as a percentage of the last day&rsquo;s max usage (it also saves all of the data so I can view it in Grafana). A Raspberry Pi Pico W in the NuVu meter listens for those messages and then changes the needle position and backlight color accordingly.</p>
 <h2 id="hardware">Hardware<a href="#hardware" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
-<p><img src="exploded-view.png" alt="An exploded view of the various pieces of the nuvu meter"></p>
+<p><img src="exploded-view.webp" alt="An exploded view of the various pieces of the nuvu meter"></p>
 <p>The main inspiration for this project was an old VU meter I had scavenged from a tape deck, so that&rsquo;s what dictated the form factor of the final product.</p>
 <p>The electronics are very minimal - a Raspberry Pi Pico W (powered via USB) drives the RGB LED and the VU meter via PWM, and that&rsquo;s all there is to it.</p>
 <p>I chose the Pico W because it was cheap and available. There are plenty of other options in this space that also would&rsquo;ve worked just as well, like the ESP32 or any of the other WiFi dev boards sold by Adafruit or Seeed Studio.</p>
@@ -182,7 +182,7 @@ At a high level, I have an Emporia Vue 2 that publishes energy readings to a sel
 <p>I considered a few alternatives and eventually landed on good ol&rsquo; Arduino. It&rsquo;s still not perfect (dependency management seems environmental and not based on a &ldquo;project&rdquo;), but I was more comfortable with the end result.</p>
 <p>There&rsquo;s only about 100 lines of really straightforward code. The <code>setup</code> function configures output pins, connects to WiFi, connects to MQTT, and then registers a callback handler that runs when a message is received.</p>
 <p>In response to a message, the callback parses the value received (0-100) and then modifies the needle position and LED color to reflect that value.</p>
-<p><img src="parts.jpg" alt="A deconstructed view of the NuVu meter"></p>
+<p><img src="parts.webp" alt="A deconstructed view of the NuVu meter"></p>
 <h2 id="resources">Resources<a href="#resources" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
 <p>The code, enclosure, and schematics are all on <a href="https://github.com/bitwisebones/nuvu-meter">Github</a> in case you want to use them as inspiration for your own project.</p>
 
