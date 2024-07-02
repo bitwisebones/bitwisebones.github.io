@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>Nintendo DS Homebrew Setup :: ascii graves</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="I bought a Nintendo DS Lite on ebay for some future projects and wanted to be able to compile and run my own programs on it. The following is a rough recounting of the process.
+Hardware From a hardware perspective, the only other things I needed were:
+&amp;ldquo;R4&amp;rdquo; Flashcard: https://www.amazon.com/dp/B098T6VMYQ SanDisk 128 GB Micro SD card: https://www.amazon.com/dp/B0B7NTY2S6 (Not affiliate links)
+Kernel/Launcher To prep the SD card, I formatted it with Rufus using the following settings:" />
+<meta name="keywords" content="" />
+
+  <meta name="robots" content="noodp" />
+
+<link rel="canonical" href="/posts/nds-homebrew-setup/" />
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/styles.css">
+
+
+
+
+
+
+
+  <link rel="shortcut icon" href="/img/theme-colors/blue.png">
+  <link rel="apple-touch-icon" href="/img/theme-colors/blue.png">
+
+
+
+<meta name="twitter:card" content="summary" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Nintendo DS Homebrew Setup">
+<meta property="og:description" content="I bought a Nintendo DS Lite on ebay for some future projects and wanted to be able to compile and run my own programs on it. The following is a rough recounting of the process.
+Hardware From a hardware perspective, the only other things I needed were:
+&amp;ldquo;R4&amp;rdquo; Flashcard: https://www.amazon.com/dp/B098T6VMYQ SanDisk 128 GB Micro SD card: https://www.amazon.com/dp/B0B7NTY2S6 (Not affiliate links)
+Kernel/Launcher To prep the SD card, I formatted it with Rufus using the following settings:" />
+<meta property="og:url" content="/posts/nds-homebrew-setup/" />
+<meta property="og:site_name" content="ascii graves" />
+
+  
+  
+    
+  
+  <meta property="og:image" content="/posts/nds-homebrew-setup/nds.webp">
+
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+
+
+  <meta property="article:published_time" content="2024-07-01 12:15:03 -0500 -0500" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body class="blue">
+
+
+<div class="container center headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    ascii graves
+  </div>
+</a>
+
+    </div>
+    
+      <ul class="menu menu--mobile">
+  <li class="menu__trigger">Menu&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+      
+        
+          <li><a href="/about">About</a></li>
+        
+      
+        
+          <li><a href="/">Posts</a></li>
+        
+      
+        
+          <li><a href="/tags">Tags</a></li>
+        
+      
+      
+    </ul>
+  </li>
+</ul>
+
+    
+    
+  </div>
+  
+    <nav class="navigation-menu">
+  <ul class="navigation-menu__inner menu--desktop">
+    
+      
+        
+          <li><a href="/about" >About</a></li>
+        
+      
+        
+          <li><a href="/" >Posts</a></li>
+        
+      
+        
+          <li><a href="/tags" >Tags</a></li>
+        
+      
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+<article class="post">
+  <h1 class="post-title">
+    <a href="/posts/nds-homebrew-setup/">Nintendo DS Homebrew Setup</a>
+  </h1>
+  <div class="post-meta"><time class="post-date">2024-07-01</time></div>
+
+  
+    <span class="post-tags">
+      
+      #<a href="/tags/tech/">tech</a>&nbsp;
+      
+      #<a href="/tags/nds/">nds</a>&nbsp;
+      
+    </span>
+  
+  
+  <img src="/posts/nds-homebrew-setup/nds.webp"
+    class="post-cover"
+    alt="Nintendo DS Homebrew Setup"
+    title="Cover Image" />
+
+
+  
+
+  <div class="post-content"><div>
+        <p>I bought a Nintendo DS Lite on ebay for some future projects and wanted to be able to compile and run my own programs on it. The following is a rough recounting of the process.</p>
+<h2 id="hardware">Hardware<a href="#hardware" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>From a hardware perspective, the only other things I needed were:</p>
+<ul>
+<li>&ldquo;R4&rdquo; Flashcard: <a href="https://www.amazon.com/dp/B098T6VMYQ">https://www.amazon.com/dp/B098T6VMYQ</a></li>
+<li>SanDisk 128 GB Micro SD card: <a href="https://www.amazon.com/dp/B0B7NTY2S6">https://www.amazon.com/dp/B0B7NTY2S6</a></li>
+</ul>
+<p>(Not affiliate links)</p>
+<h2 id="kernellauncher">Kernel/Launcher<a href="#kernellauncher" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>To prep the SD card, I formatted it with <a href="https://rufus.ie/en/">Rufus</a> using the following settings:</p>
+<p><img src="rufus-settings.png" alt="A screenshot of rufus showing the settings used"></p>
+<p>The important bits here are:</p>
+<ul>
+<li>Boot selection: Non bootable</li>
+<li>File system: Large FAT32</li>
+</ul>
+<p>With that done, I needed to download a kernel. The kernel acts as a launcher - it allows you to browse the files on the SD card (or a slot-2 cartridge) and select which one to run.</p>
+<p>The kernel I used is &ldquo;Ace3DS+ Wood R4 v1.62&rdquo;. You can find more information on <a href="https://www.flashcarts.net/ds-quick-start-guide">The Flashcarts Wiki</a>, but here&rsquo;s a direct download link: <a href="https://flashcard-archive.ds-homebrew.com/Ace3DS+_R4iLS/Ace3DS+_R4iLS_Wood_R4_1.62.zip">https://flashcard-archive.ds-homebrew.com/Ace3DS+_R4iLS/Ace3DS+_R4iLS_Wood_R4_1.62.zip</a>.</p>
+<p>I unzipped the file and copied the contents onto the SD card.</p>
+<p>Now, with the SD card in the R4 flashcard and the R4 in the DS, the DS successfully boots into the launcher.</p>
+<h2 id="building-a-homebrew-ds-game">Building a Homebrew DS Game<a href="#building-a-homebrew-ds-game" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>Setting up a development environment was much easier than I thought it would be, mainly thanks to dev containers.</p>
+<blockquote>
+<p>Note: here&rsquo;s a great YouTube video that covers the basics of dev containers if you&rsquo;re unfamiliar (like I was): <a href="https://www.youtube.com/watch?v=SDa3v4Quj7Y">https://www.youtube.com/watch?v=SDa3v4Quj7Y</a>.</p>
+</blockquote>
+<p>First, let&rsquo;s talk about prerequisites. I already had VS Code and Docker Desktop installed on my Windows dev machine. I also installed two VS Code extensions: <a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack">Remote Development</a> and <a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools">C/C++</a>.</p>
+<p>The next step was to create a dev container. Thanks to the video I linked above, I knew to use the &ldquo;Clone Repository in Container Volume&rdquo; command to clone an empty repo into a new dev container. I used a basic Debian image because I knew I&rsquo;d be changing it later.</p>
+<p>Now that the container was created, I was able to edit the devcontainer.json config file. I chose to swap out the direct image reference for a reference to a Dockerfile, but that turned out not to be necessary in the end. It should be sufficient to change the image to be the latest version of <code>devkitpro/devkitarm</code>.</p>
+<pre tabindex="0"><code>&lt;devcontainer.json&gt;
+
+{
+	&#34;name&#34;: &#34;NDS&#34;,
+	&#34;image&#34;: &#34;devkitpro/devkitarm:20240511&#34;
+}
+</code></pre><p>I&rsquo;ve yet to mention <a href="https://devkitpro.org/">devkitPro</a> - this is a toolchain and set of libraries that make it easy to write NDS games. They provide a bunch of <a href="https://github.com/devkitPro/nds-examples">examples</a> that I referenced to get my project set up correctly.</p>
+<p>I copied a Makefile from the example repo, so I made sure to keep my directory layout the same</p>
+<ul>
+<li>project root/
+<ul>
+<li>.devcontainer/
+<ul>
+<li>devcontainer.json</li>
+</ul>
+</li>
+<li>data/</li>
+<li>source/
+<ul>
+<li>main.cpp</li>
+</ul>
+</li>
+<li>Makefile</li>
+</ul>
+</li>
+</ul>
+<p>The full repo is available on GitHub: <a href="https://github.com/bitwisebones/nds-homebrew-example">https://github.com/bitwisebones/nds-homebrew-example</a>.</p>
+<p>With that all in place, I ran <code>make</code> in the root folder in the container, and the <code>.nds</code> file was successfully built.</p>
+<p>The last piece of the puzzle for me was getting the <code>.nds</code> file onto the SD card. Just <em>finding</em> that file (in the dev container&rsquo;s volume, somewhere in the WSL filesystem) was a pain. The magic path for my Docker Desktop install was:</p>
+<p><code>\\wsl.localhost\docker-desktop-data\data\docker\volumes</code></p>
+<p>And that&rsquo;s the whole process. I was also able to run the .nds file on an <a href="http://desmume.org/">emulator</a> to test changes before I went through the physical process of copying it to the SD card (which can be tedious).</p>
+
+      </div></div>
+
+  
+
+  
+    
+
+  
+</article>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2024 Powered by <a href="https://gohugo.io">Hugo</a></span>
+    
+      <span>:: <a href="https://github.com/panr/hugo-theme-terminal" target="_blank">Theme</a> made by <a href="https://github.com/panr" target="_blank">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+
+
+
+
+
+<script type="text/javascript" src="/bundle.min.js"></script>
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>

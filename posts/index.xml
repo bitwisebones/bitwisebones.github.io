@@ -6,7 +6,79 @@
     <description>Recent content in Posts on ascii graves</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 29 Feb 2024 06:00:00 -0500</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 01 Jul 2024 12:15:03 -0500</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Nintendo DS Homebrew Setup</title>
+      <link>/posts/nds-homebrew-setup/</link>
+      <pubDate>Mon, 01 Jul 2024 12:15:03 -0500</pubDate>
+      
+      <guid>/posts/nds-homebrew-setup/</guid>
+      <description>I bought a Nintendo DS Lite on ebay for some future projects and wanted to be able to compile and run my own programs on it. The following is a rough recounting of the process.
+Hardware From a hardware perspective, the only other things I needed were:
+&amp;ldquo;R4&amp;rdquo; Flashcard: https://www.amazon.com/dp/B098T6VMYQ SanDisk 128 GB Micro SD card: https://www.amazon.com/dp/B0B7NTY2S6 (Not affiliate links)
+Kernel/Launcher To prep the SD card, I formatted it with Rufus using the following settings:</description>
+      <content>&lt;p&gt;I bought a Nintendo DS Lite on ebay for some future projects and wanted to be able to compile and run my own programs on it. The following is a rough recounting of the process.&lt;/p&gt;
+&lt;h2 id=&#34;hardware&#34;&gt;Hardware&lt;/h2&gt;
+&lt;p&gt;From a hardware perspective, the only other things I needed were:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&amp;ldquo;R4&amp;rdquo; Flashcard: &lt;a href=&#34;https://www.amazon.com/dp/B098T6VMYQ&#34;&gt;https://www.amazon.com/dp/B098T6VMYQ&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;SanDisk 128 GB Micro SD card: &lt;a href=&#34;https://www.amazon.com/dp/B0B7NTY2S6&#34;&gt;https://www.amazon.com/dp/B0B7NTY2S6&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;(Not affiliate links)&lt;/p&gt;
+&lt;h2 id=&#34;kernellauncher&#34;&gt;Kernel/Launcher&lt;/h2&gt;
+&lt;p&gt;To prep the SD card, I formatted it with &lt;a href=&#34;https://rufus.ie/en/&#34;&gt;Rufus&lt;/a&gt; using the following settings:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;rufus-settings.png&#34; alt=&#34;A screenshot of rufus showing the settings used&#34;&gt;&lt;/p&gt;
+&lt;p&gt;The important bits here are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Boot selection: Non bootable&lt;/li&gt;
+&lt;li&gt;File system: Large FAT32&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;With that done, I needed to download a kernel. The kernel acts as a launcher - it allows you to browse the files on the SD card (or a slot-2 cartridge) and select which one to run.&lt;/p&gt;
+&lt;p&gt;The kernel I used is &amp;ldquo;Ace3DS+ Wood R4 v1.62&amp;rdquo;. You can find more information on &lt;a href=&#34;https://www.flashcarts.net/ds-quick-start-guide&#34;&gt;The Flashcarts Wiki&lt;/a&gt;, but here&amp;rsquo;s a direct download link: &lt;a href=&#34;https://flashcard-archive.ds-homebrew.com/Ace3DS+_R4iLS/Ace3DS+_R4iLS_Wood_R4_1.62.zip&#34;&gt;https://flashcard-archive.ds-homebrew.com/Ace3DS+_R4iLS/Ace3DS+_R4iLS_Wood_R4_1.62.zip&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;I unzipped the file and copied the contents onto the SD card.&lt;/p&gt;
+&lt;p&gt;Now, with the SD card in the R4 flashcard and the R4 in the DS, the DS successfully boots into the launcher.&lt;/p&gt;
+&lt;h2 id=&#34;building-a-homebrew-ds-game&#34;&gt;Building a Homebrew DS Game&lt;/h2&gt;
+&lt;p&gt;Setting up a development environment was much easier than I thought it would be, mainly thanks to dev containers.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Note: here&amp;rsquo;s a great YouTube video that covers the basics of dev containers if you&amp;rsquo;re unfamiliar (like I was): &lt;a href=&#34;https://www.youtube.com/watch?v=SDa3v4Quj7Y&#34;&gt;https://www.youtube.com/watch?v=SDa3v4Quj7Y&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;First, let&amp;rsquo;s talk about prerequisites. I already had VS Code and Docker Desktop installed on my Windows dev machine. I also installed two VS Code extensions: &lt;a href=&#34;https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack&#34;&gt;Remote Development&lt;/a&gt; and &lt;a href=&#34;https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools&#34;&gt;C/C++&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The next step was to create a dev container. Thanks to the video I linked above, I knew to use the &amp;ldquo;Clone Repository in Container Volume&amp;rdquo; command to clone an empty repo into a new dev container. I used a basic Debian image because I knew I&amp;rsquo;d be changing it later.&lt;/p&gt;
+&lt;p&gt;Now that the container was created, I was able to edit the devcontainer.json config file. I chose to swap out the direct image reference for a reference to a Dockerfile, but that turned out not to be necessary in the end. It should be sufficient to change the image to be the latest version of &lt;code&gt;devkitpro/devkitarm&lt;/code&gt;.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&amp;lt;devcontainer.json&amp;gt;
+
+{
+	&amp;#34;name&amp;#34;: &amp;#34;NDS&amp;#34;,
+	&amp;#34;image&amp;#34;: &amp;#34;devkitpro/devkitarm:20240511&amp;#34;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;I&amp;rsquo;ve yet to mention &lt;a href=&#34;https://devkitpro.org/&#34;&gt;devkitPro&lt;/a&gt; - this is a toolchain and set of libraries that make it easy to write NDS games. They provide a bunch of &lt;a href=&#34;https://github.com/devkitPro/nds-examples&#34;&gt;examples&lt;/a&gt; that I referenced to get my project set up correctly.&lt;/p&gt;
+&lt;p&gt;I copied a Makefile from the example repo, so I made sure to keep my directory layout the same&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;project root/
+&lt;ul&gt;
+&lt;li&gt;.devcontainer/
+&lt;ul&gt;
+&lt;li&gt;devcontainer.json&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;data/&lt;/li&gt;
+&lt;li&gt;source/
+&lt;ul&gt;
+&lt;li&gt;main.cpp&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Makefile&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The full repo is available on GitHub: &lt;a href=&#34;https://github.com/bitwisebones/nds-homebrew-example&#34;&gt;https://github.com/bitwisebones/nds-homebrew-example&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;With that all in place, I ran &lt;code&gt;make&lt;/code&gt; in the root folder in the container, and the &lt;code&gt;.nds&lt;/code&gt; file was successfully built.&lt;/p&gt;
+&lt;p&gt;The last piece of the puzzle for me was getting the &lt;code&gt;.nds&lt;/code&gt; file onto the SD card. Just &lt;em&gt;finding&lt;/em&gt; that file (in the dev container&amp;rsquo;s volume, somewhere in the WSL filesystem) was a pain. The magic path for my Docker Desktop install was:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;\\wsl.localhost\docker-desktop-data\data\docker\volumes&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;And that&amp;rsquo;s the whole process. I was also able to run the .nds file on an &lt;a href=&#34;http://desmume.org/&#34;&gt;emulator&lt;/a&gt; to test changes before I went through the physical process of copying it to the SD card (which can be tedious).&lt;/p&gt;
+</content>
+    </item>
+    
     <item>
       <title>NuVu Meter</title>
       <link>/posts/nuvu-meter/</link>
