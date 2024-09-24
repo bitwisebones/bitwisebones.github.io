@@ -6,9 +6,29 @@
     <description>Recent content in Tags on ascii graves</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 01 Jul 2024 12:15:03 -0500</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 24 Sep 2024 00:00:00 -0500</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>nds</title>
+      <title>Diy</title>
+      <link>/tags/diy/</link>
+      <pubDate>Tue, 24 Sep 2024 00:00:00 -0500</pubDate>
+      
+      <guid>/tags/diy/</guid>
+      <description></description>
+      <content></content>
+    </item>
+    
+    <item>
+      <title>Sewing</title>
+      <link>/tags/sewing/</link>
+      <pubDate>Tue, 24 Sep 2024 00:00:00 -0500</pubDate>
+      
+      <guid>/tags/sewing/</guid>
+      <description></description>
+      <content></content>
+    </item>
+    
+    <item>
+      <title>Nds</title>
       <link>/tags/nds/</link>
       <pubDate>Mon, 01 Jul 2024 12:15:03 -0500</pubDate>
       
@@ -18,7 +38,7 @@
     </item>
     
     <item>
-      <title>tech</title>
+      <title>Tech</title>
       <link>/tags/tech/</link>
       <pubDate>Mon, 01 Jul 2024 12:15:03 -0500</pubDate>
       
@@ -28,7 +48,7 @@
     </item>
     
     <item>
-      <title>electronics</title>
+      <title>Electronics</title>
       <link>/tags/electronics/</link>
       <pubDate>Thu, 29 Feb 2024 06:00:00 -0500</pubDate>
       
@@ -38,7 +58,7 @@
     </item>
     
     <item>
-      <title>iot</title>
+      <title>Iot</title>
       <link>/tags/iot/</link>
       <pubDate>Thu, 29 Feb 2024 06:00:00 -0500</pubDate>
       
@@ -48,7 +68,7 @@
     </item>
     
     <item>
-      <title>nostalgia</title>
+      <title>Nostalgia</title>
       <link>/tags/nostalgia/</link>
       <pubDate>Tue, 23 Jan 2024 12:05:48 -0500</pubDate>
       
@@ -58,7 +78,7 @@
     </item>
     
     <item>
-      <title>photos</title>
+      <title>Photos</title>
       <link>/tags/photos/</link>
       <pubDate>Tue, 23 Jan 2024 12:05:48 -0500</pubDate>
       

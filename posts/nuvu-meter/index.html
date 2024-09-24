@@ -6,8 +6,9 @@
   
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="I had a few salvaged VU meters burning a hole in my proverbial pocket, so I decided to turn one into a readout for my home&amp;rsquo;s energy usage.
-At a high level, I have an Emporia Vue 2 that publishes energy readings to a self-hosted MQTT server (this is not default behavior and required flashing custom config to the device). My self-hosted NodeRed instance listens for those messages, extracts the relevant data, and issues a new message with the total point-in-time energy usage as a percentage of the last day&amp;rsquo;s max usage (it also saves all of the data so I can view it in Grafana)." />
+<meta name="description" content="I had a few salvaged VU meters burning a hole in my proverbial pocket, so I decided to turn one into a readout for my home&rsquo;s energy usage.
+At a high level, I have an Emporia Vue 2 that publishes energy readings to a self-hosted MQTT server (this is not default behavior and required flashing custom config to the device). My self-hosted NodeRed instance listens for those messages, extracts the relevant data, and issues a new message with the total point-in-time energy usage as a percentage of the last day&rsquo;s max usage (it also saves all of the data so I can view it in Grafana). A Raspberry Pi Pico W in the NuVu meter listens for those messages and then changes the needle position and backlight color accordingly.
+" />
 <meta name="keywords" content="" />
 
   <meta name="robots" content="noodp" />
@@ -44,8 +45,9 @@ At a high level, I have an Emporia Vue 2 that publishes energy readings to a sel
 <meta property="og:locale" content="en" />
 <meta property="og:type" content="article" />
 <meta property="og:title" content="NuVu Meter">
-<meta property="og:description" content="I had a few salvaged VU meters burning a hole in my proverbial pocket, so I decided to turn one into a readout for my home&amp;rsquo;s energy usage.
-At a high level, I have an Emporia Vue 2 that publishes energy readings to a self-hosted MQTT server (this is not default behavior and required flashing custom config to the device). My self-hosted NodeRed instance listens for those messages, extracts the relevant data, and issues a new message with the total point-in-time energy usage as a percentage of the last day&amp;rsquo;s max usage (it also saves all of the data so I can view it in Grafana)." />
+<meta property="og:description" content="I had a few salvaged VU meters burning a hole in my proverbial pocket, so I decided to turn one into a readout for my home&rsquo;s energy usage.
+At a high level, I have an Emporia Vue 2 that publishes energy readings to a self-hosted MQTT server (this is not default behavior and required flashing custom config to the device). My self-hosted NodeRed instance listens for those messages, extracts the relevant data, and issues a new message with the total point-in-time energy usage as a percentage of the last day&rsquo;s max usage (it also saves all of the data so I can view it in Grafana). A Raspberry Pi Pico W in the NuVu meter listens for those messages and then changes the needle position and backlight color accordingly.
+" />
 <meta property="og:url" content="/posts/nuvu-meter/" />
 <meta property="og:site_name" content="ascii graves" />
 

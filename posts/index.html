@@ -142,6 +142,44 @@
     
       <article class="post on-list">
         <h1 class="post-title">
+          <a href="/posts/tool-roll/">DIY Tool Roll</a>
+        </h1>
+        <div class="post-meta"><time class="post-date">2024-09-24</time></div>
+
+        
+          <span class="post-tags">
+            
+            #<a href="/tags/sewing/">sewing</a>&nbsp;
+            
+            #<a href="/tags/diy/">diy</a>&nbsp;
+            
+          </span>
+        
+
+        
+  <img src="/posts/tool-roll/tool-roll-open.webp"
+    class="post-cover"
+    alt="DIY Tool Roll"
+    title="Cover Image" />
+
+
+        <div class="post-content">
+          
+            <p>I&rsquo;ve had a bunch of tools jingling around in a bag I keep in the basket of my bike, and I decided it was time to make something to keep them quiet and secure.</p>
+<p>I loosely followed <a href="https://www.youtube.com/watch?v=ZvCMNSe9sOo">this video</a> on YouTube for the general construction, though I did deviate a bit (specifically on the top flap).</p>
+<p>The roll is made from yellow duck canvas and polyester thread, along with a zipper, some webbing, and a plastic clip.</p>
+          
+        </div>
+
+        
+          <div>
+            <a class="read-more button" href="/posts/tool-roll/"> →</a>
+          </div>
+        
+      </article>
+    
+      <article class="post on-list">
+        <h1 class="post-title">
           <a href="/posts/nds-homebrew-setup/">Nintendo DS Homebrew Setup</a>
         </h1>
         <div class="post-meta"><time class="post-date">2024-07-01</time></div>
@@ -165,10 +203,16 @@
 
         <div class="post-content">
           
-            I bought a Nintendo DS Lite on ebay for some future projects and wanted to be able to compile and run my own programs on it. The following is a rough recounting of the process.
-Hardware From a hardware perspective, the only other things I needed were:
-&ldquo;R4&rdquo; Flashcard: https://www.amazon.com/dp/B098T6VMYQ SanDisk 128 GB Micro SD card: https://www.amazon.com/dp/B0B7NTY2S6 (Not affiliate links)
-Kernel/Launcher To prep the SD card, I formatted it with Rufus using the following settings:
+            <p>I bought a Nintendo DS Lite on ebay for some future projects and wanted to be able to compile and run my own programs on it. The following is a rough recounting of the process.</p>
+<h2 id="hardware">Hardware</h2>
+<p>From a hardware perspective, the only other things I needed were:</p>
+<ul>
+<li>&ldquo;R4&rdquo; Flashcard: <a href="https://www.amazon.com/dp/B098T6VMYQ">https://www.amazon.com/dp/B098T6VMYQ</a></li>
+<li>SanDisk 128 GB Micro SD card: <a href="https://www.amazon.com/dp/B0B7NTY2S6">https://www.amazon.com/dp/B0B7NTY2S6</a></li>
+</ul>
+<p>(Not affiliate links)</p>
+<h2 id="kernellauncher">Kernel/Launcher</h2>
+<p>To prep the SD card, I formatted it with <a href="https://rufus.ie/en/">Rufus</a> using the following settings:</p>
           
         </div>
 
@@ -204,8 +248,8 @@ Kernel/Launcher To prep the SD card, I formatted it with Rufus using the followi
 
         <div class="post-content">
           
-            I had a few salvaged VU meters burning a hole in my proverbial pocket, so I decided to turn one into a readout for my home&rsquo;s energy usage.
-At a high level, I have an Emporia Vue 2 that publishes energy readings to a self-hosted MQTT server (this is not default behavior and required flashing custom config to the device). My self-hosted NodeRed instance listens for those messages, extracts the relevant data, and issues a new message with the total point-in-time energy usage as a percentage of the last day&rsquo;s max usage (it also saves all of the data so I can view it in Grafana).
+            <p>I had a few salvaged VU meters burning a hole in my proverbial pocket, so I decided to turn one into a readout for my home&rsquo;s energy usage.</p>
+<p>At a high level, I have an <a href="https://shop.emporiaenergy.com/products/gen-2-emporia-vue-with-16-sensors-bundle">Emporia Vue 2</a> that publishes energy readings to a self-hosted MQTT server (this is not default behavior and required flashing custom config to the device). My self-hosted NodeRed instance listens for those messages, extracts the relevant data, and issues a new message with the total point-in-time energy usage as a percentage of the last day&rsquo;s max usage (it also saves all of the data so I can view it in Grafana). A Raspberry Pi Pico W in the NuVu meter listens for those messages and then changes the needle position and backlight color accordingly.</p>
           
         </div>
 
@@ -239,9 +283,13 @@ At a high level, I have an Emporia Vue 2 that publishes energy readings to a sel
 
         <div class="post-content">
           
-            I&rsquo;ve had many different PC setups throughout the years. Here are some that I was able to find pictures of, starting with my first post-college apartment in 2012. Prior to college, my family had a few various Packard Bell, Gateway, and Dell desktops.
-2012 Ikea desk, 23 inch HP monitor, 14 inch HP laptop
-2014 Different Ikea desk, same HP monitor, first mechanical keyboard (Cherry MX Blue switches), Not pictured: new desktop PC with an 🌟SSD🌟
+            <p>I&rsquo;ve had many different PC setups throughout the years. Here are some that I was able to find pictures of, starting with my first post-college apartment in 2012. Prior to college, my family had a few various Packard Bell, Gateway, and Dell desktops.</p>
+<h2 id="2012">2012</h2>
+<p><img src="2012.jpg" alt="An ikea desk with a monitor and laptop on it">
+<em>Ikea desk, 23 inch HP monitor, 14 inch HP laptop</em></p>
+<h2 id="2014">2014</h2>
+<p><img src="2014.jpg" alt="An ikea desk with a computer monitor and keyboard">
+<em>Different Ikea desk, same HP monitor, first mechanical keyboard (Cherry MX Blue switches), Not pictured: new desktop PC with an 🌟SSD🌟</em></p>
           
         </div>
 
@@ -275,9 +323,13 @@ At a high level, I have an Emporia Vue 2 that publishes energy readings to a sel
 
         <div class="post-content">
           
-            Here&rsquo;s a brief look at my various workstations throughout my career.
-2012 My very first tech job working for the college I attended&hellip;in a closet in the basement of a building on campus. Mostly performed maintenance on the college&rsquo;s public and private websites which were built with WebForms in VB.
-2013 First job out of college was a small marketing agency that was trying to transition from print to web. It was also a Mac shop.
+            <p>Here&rsquo;s a brief look at my various workstations throughout my career.</p>
+<h2 id="2012">2012</h2>
+<p><img src="2012.jpg" alt="Two small square monitors">
+<em>My very first tech job working for the college I attended&hellip;in a closet in the basement of a building on campus. Mostly performed maintenance on the college&rsquo;s public and private websites which were built with WebForms in VB.</em></p>
+<h2 id="2013">2013</h2>
+<p><img src="2013.jpg" alt="A widescreen monitor and a mac mini">
+<em>First job out of college was a small marketing agency that was trying to transition from print to web. It was also a Mac shop.</em></p>
           
         </div>
 
