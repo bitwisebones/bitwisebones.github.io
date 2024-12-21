@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>2024 Self-Hosting Update :: ascii graves</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="I&amp;rsquo;m planning to make some changes to my self-hosting configuration in 2025, so I figured I would capture some details about my current set up for posterity.
+Services First, let&amp;rsquo;s take a look at the various services that I&amp;rsquo;m running. I&amp;rsquo;ve organized these by &amp;ldquo;purpose&amp;rdquo;, with a catch-all category at the end. It&amp;rsquo;s worth noting that none of these services are critical. If Home Assistant or Z-Wave JS are down, the lights in the house still work." />
+<meta name="keywords" content="" />
+
+  <meta name="robots" content="noodp" />
+
+<link rel="canonical" href="/posts/selfhosted-2024/" />
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/styles.css">
+
+
+
+
+
+
+
+  <link rel="shortcut icon" href="/img/theme-colors/blue.png">
+  <link rel="apple-touch-icon" href="/img/theme-colors/blue.png">
+
+
+
+<meta name="twitter:card" content="summary" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="2024 Self-Hosting Update">
+<meta property="og:description" content="I&amp;rsquo;m planning to make some changes to my self-hosting configuration in 2025, so I figured I would capture some details about my current set up for posterity.
+Services First, let&amp;rsquo;s take a look at the various services that I&amp;rsquo;m running. I&amp;rsquo;ve organized these by &amp;ldquo;purpose&amp;rdquo;, with a catch-all category at the end. It&amp;rsquo;s worth noting that none of these services are critical. If Home Assistant or Z-Wave JS are down, the lights in the house still work." />
+<meta property="og:url" content="/posts/selfhosted-2024/" />
+<meta property="og:site_name" content="ascii graves" />
+
+  
+    <meta property="og:image" content="/img/favicon/blue.png">
+  
+
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+
+
+  <meta property="article:published_time" content="2024-12-21 00:00:00 -0500 -0500" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body class="blue">
+
+
+<div class="container center headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    ascii graves
+  </div>
+</a>
+
+    </div>
+    
+      <ul class="menu menu--mobile">
+  <li class="menu__trigger">Menu&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+      
+        
+          <li><a href="/about">About</a></li>
+        
+      
+        
+          <li><a href="/">Posts</a></li>
+        
+      
+        
+          <li><a href="/tags">Tags</a></li>
+        
+      
+      
+    </ul>
+  </li>
+</ul>
+
+    
+    
+  </div>
+  
+    <nav class="navigation-menu">
+  <ul class="navigation-menu__inner menu--desktop">
+    
+      
+        
+          <li><a href="/about" >About</a></li>
+        
+      
+        
+          <li><a href="/" >Posts</a></li>
+        
+      
+        
+          <li><a href="/tags" >Tags</a></li>
+        
+      
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+<article class="post">
+  <h1 class="post-title">
+    <a href="/posts/selfhosted-2024/">2024 Self-Hosting Update</a>
+  </h1>
+  <div class="post-meta"><time class="post-date">2024-12-21</time></div>
+
+  
+    <span class="post-tags">
+      
+      #<a href="/tags/tech/">tech</a>&nbsp;
+      
+      #<a href="/tags/selfhosting/">selfhosting</a>&nbsp;
+      
+    </span>
+  
+  
+
+
+  
+
+  <div class="post-content"><div>
+        <p>I&rsquo;m planning to make some changes to my self-hosting configuration in 2025, so I figured I would capture some details about my current set up for posterity.</p>
+<h2 id="services">Services<a href="#services" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>First, let&rsquo;s take a look at the various services that I&rsquo;m running. I&rsquo;ve organized these by &ldquo;purpose&rdquo;, with a catch-all category at the end. It&rsquo;s worth noting that none of these services are critical. If Home Assistant or Z-Wave JS are down, the lights in the house still work. If Pi-Hole DNS is down, the router uses a backup public DNS server. These services <em>do</em> make my life better, but I can function without them.</p>
+<h4 id="media">Media<a href="#media" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h4>
+<ul>
+<li><a href="https://jellyfin.org/">Jellyfin</a> for media streaming</li>
+<li><a href="https://wiki.servarr.com/">*Arr Stack</a> for media acquisition</li>
+</ul>
+<h4 id="home">Home<a href="#home" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h4>
+<ul>
+<li><a href="https://www.home-assistant.io/">Home Assistant</a> for basic smart home controls</li>
+<li><a href="https://frigate.video/">Frigate</a> for security camera viewing and recording</li>
+<li><a href="https://github.com/zwave-js/zwave-js-ui">Z-Wave JS</a> for integration with z-wave devices</li>
+</ul>
+<h4 id="productivity">Productivity<a href="#productivity" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h4>
+<ul>
+<li><a href="https://linkding.link/">linkding</a> for the SingleFile archiving feature</li>
+<li><a href="https://readeck.org/en/">Readeck</a> for a &ldquo;read later&rdquo; list</li>
+<li><a href="https://silverbullet.md/">SilverBullet</a> for notes, wiki, etc</li>
+</ul>
+<h4 id="supporting-services">Supporting Services<a href="#supporting-services" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h4>
+<ul>
+<li><a href="https://github.com/garethgeorge/backrest">Backrest</a> for backups</li>
+<li><a href="https://filebrowser.org/">File Browser</a> for browsing archived PDFs and other files</li>
+<li><a href="https://about.gitea.com/">Gitea</a> for version control</li>
+<li><a href="https://grafana.com/">Grafana</a> for various home- and server-related dashboards</li>
+<li><a href="https://mosquitto.org/">Mosquitto</a> for MQTT integration in Frigate, Z-Wave JS, and others</li>
+<li><a href="https://nodered.org/">Node-RED</a> for several automated tasks based on schedules or MQTT triggers</li>
+<li><a href="https://pi-hole.net/">Pi-Hole</a> for network-wide ad blocking and custom DNS</li>
+<li><a href="https://www.postgresql.org/">Postgres</a> for storing data, specifically energy metrics</li>
+<li><a href="https://docs.postgrest.org/en/v12/">PostgREST</a> for an easy way to send data to postgres from Node-RED</li>
+<li><a href="https://prometheus.io/">Prometheus</a> for storing metrics</li>
+<li><a href="https://github.com/dperson/samba">Samba</a> for sharing files to Windows workstations</li>
+<li><a href="https://traefik.io/traefik/">Traefik</a> for reverse proxying requests via subdomains</li>
+<li><a href="https://woodpecker-ci.org/">Woodpecker CI</a> for building and deploying both code <em>and</em> infrastructure</li>
+</ul>
+<h2 id="interesting-use-cases">Interesting Use Cases<a href="#interesting-use-cases" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>Most of this stuff is pretty vanilla, but there are some interesting integrations that I&rsquo;ve built over the years that might be slightly more novel.</p>
+<h4 id="reading-and-notetaking-pipeline">Reading and Notetaking Pipeline<a href="#reading-and-notetaking-pipeline" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h4>
+<p>I use Readeck to maintain a list of articles I want to read. When I have some downtime, I&rsquo;ll pick something from the list and use the built-in reader mode to read and highlight articles. When I&rsquo;m finished reading an article, I add a &ldquo;recap&rdquo; tag to it.</p>
+<p>Each night, a Node-RED flow runs and looks for new articles in Readeck with the &ldquo;recap&rdquo; tag. If it finds one, it creates a new page in SilverBullet with links to the original article, the reader-mode version stored in Readeck, and all of the passages that I highlighted. The new page also gets a &ldquo;torecap&rdquo; tag, causing it to show up in a query on my SilverBullet homepage.</p>
+<p>This workflow makes it really easy to find something to read, highlight important ideas, and then come back later to reflect on the content and take more detailed notes.</p>
+<p><img src="reading-pipeline.png" alt="A screenshot of a node-red pipeline"></p>
+<h4 id="home-energy-monitoring">Home Energy Monitoring<a href="#home-energy-monitoring" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h4>
+<p>I installed an <a href="https://www.emporiaenergy.com/blog/introducing-emporia-vue/">Emporia Vue 2</a> so that I can record energy usage in my home at the circuit level. Thanks to some <a href="https://flaviutamas.com/2021/reversing-emporia-vue-2">smart people</a> on the internet, I was able to reflash the device so that it connects to my local MQTT broker (Mosquitto).</p>
+<p>A Node-RED flow picks up all messages sent via MQTT from the Vue 2 and POSTs them to PostgREST, storing them in a postgres database. At this point I have ~4GB of metrics spanning around 2 years.</p>
+<p>I then built a Grafana dashboard that allows me to see energy consumption and estimated cost.</p>
+<p><img src="energy-dashboard.png" alt="A dashboard with several graphs indicating energy use over time as well as total cost"></p>
+<h4 id="infrastructure-deployments">Infrastructure Deployments<a href="#infrastructure-deployments" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h4>
+<p>I take a GitOps-based approach to my self-hosted infrastructure using a combination of Gitea, Woodpecker CI, and Ansible.</p>
+<p>All of my services are deployed as Docker containers using Ansible&rsquo;s <code>community.docker.docker_container</code> module. I like Ansible because its vault allows me to commit encrypted secrets to the repo so that literally everything is in one spot.</p>
+<p>Rather than running Ansible manually, I run it in a Woodpecker pipeline using the <a href="https://registry.hub.docker.com/r/librespace/ansible">librespace/ansible</a> image. I pass docker.sock and some file paths through to the Woodpecker runner container as volumes so that Ansible can interact with Docker on the host machine. Deploying a new container is as easy as adding a new YAML file to the repo and pushing. Woodpecker will run the pipeline and deploy the new container via Ansible.</p>
+<p>It&rsquo;s a little janky and terribly insecure, but it&rsquo;s easy to set up and has served me well.</p>
+<h2 id="hardware">Hardware<a href="#hardware" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>I have a single desktop PC from ~2013 running all of my self-hosted services. It has an i5-4670K CPU and 16 GB of RAM. I also have a Z-Wave USB dongle for home automation and a Google Coral TPU USB dongle for Frigate&rsquo;s object detection functionality.</p>
+<p>For storage I have a 120 GB SSD boot drive, a 2 TB SSD for &ldquo;normal&rdquo; storage, and a 2 TB HDD for security camera recordings. Disk redundancy is on my to-do list for 2025.</p>
+<p>Overall the system performs quite well for the workload. Offloading the object detection to the Coral TPU saves a ton of CPU.</p>
+<p><img src="system-load.png" alt="a chart showing moderately low system load over the past seven days"></p>
+<h2 id="looking-forward">Looking Forward<a href="#looking-forward" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>I&rsquo;d like to focus on two areas for improvement in 2025 - hardware and deployments.</p>
+<p>I&rsquo;m hoping to build out a new &ldquo;server&rdquo; for the services I&rsquo;ve listed above. I&rsquo;m not looking at anything too new or fancy, just a slightly newer CPU, a little more RAM, and some additional disks probably running ZFS for better redundancy.</p>
+<p>If I can get that new machine in place, I&rsquo;d like to repurpose the old PC as a true lab machine. I&rsquo;ll probably install proxmox so that I can virtualize windows and linux as necessary for research projects.</p>
+<p>I&rsquo;d also like to replace my Gitea/Woodpecker/Ansible set up for infrastructure deployments. I currently have my eye on <a href="https://komo.do/">Komodo</a>. Hopefully I can use its <a href="https://komo.do/docs/sync-resources">resource syncing</a> feature to keep all of the configuration in version control like I have now. Not 100% sure how I&rsquo;ll handle secrets yet, so if you have any ideas - let me know!</p>
+
+      </div></div>
+
+  
+
+  
+    
+
+  
+</article>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2024 Powered by <a href="https://gohugo.io">Hugo</a></span>
+    
+      <span>:: <a href="https://github.com/panr/hugo-theme-terminal" target="_blank">Theme</a> made by <a href="https://github.com/panr" target="_blank">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+
+
+
+
+
+<script type="text/javascript" src="/bundle.min.js"></script>
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>

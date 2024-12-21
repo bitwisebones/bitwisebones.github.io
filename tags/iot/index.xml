@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Iot on ascii graves</title>
+    <title>iot on ascii graves</title>
     <link>/tags/iot/</link>
-    <description>Recent content in Iot on ascii graves</description>
+    <description>Recent content in iot on ascii graves</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 29 Feb 2024 06:00:00 -0500</lastBuildDate><atom:link href="/tags/iot/index.xml" rel="self" type="application/rss+xml" />
@@ -13,8 +13,8 @@
       <pubDate>Thu, 29 Feb 2024 06:00:00 -0500</pubDate>
       
       <guid>/posts/nuvu-meter/</guid>
-      <description>&lt;p&gt;I had a few salvaged VU meters burning a hole in my proverbial pocket, so I decided to turn one into a readout for my home&amp;rsquo;s energy usage.&lt;/p&gt;
-&lt;p&gt;At a high level, I have an &lt;a href=&#34;https://shop.emporiaenergy.com/products/gen-2-emporia-vue-with-16-sensors-bundle&#34;&gt;Emporia Vue 2&lt;/a&gt; that publishes energy readings to a self-hosted MQTT server (this is not default behavior and required flashing custom config to the device). My self-hosted NodeRed instance listens for those messages, extracts the relevant data, and issues a new message with the total point-in-time energy usage as a percentage of the last day&amp;rsquo;s max usage (it also saves all of the data so I can view it in Grafana). A Raspberry Pi Pico W in the NuVu meter listens for those messages and then changes the needle position and backlight color accordingly.&lt;/p&gt;</description>
+      <description>I had a few salvaged VU meters burning a hole in my proverbial pocket, so I decided to turn one into a readout for my home&amp;rsquo;s energy usage.
+At a high level, I have an Emporia Vue 2 that publishes energy readings to a self-hosted MQTT server (this is not default behavior and required flashing custom config to the device). My self-hosted NodeRed instance listens for those messages, extracts the relevant data, and issues a new message with the total point-in-time energy usage as a percentage of the last day&amp;rsquo;s max usage (it also saves all of the data so I can view it in Grafana).</description>
       <content>&lt;p&gt;I had a few salvaged VU meters burning a hole in my proverbial pocket, so I decided to turn one into a readout for my home&amp;rsquo;s energy usage.&lt;/p&gt;
 &lt;p&gt;At a high level, I have an &lt;a href=&#34;https://shop.emporiaenergy.com/products/gen-2-emporia-vue-with-16-sensors-bundle&#34;&gt;Emporia Vue 2&lt;/a&gt; that publishes energy readings to a self-hosted MQTT server (this is not default behavior and required flashing custom config to the device). My self-hosted NodeRed instance listens for those messages, extracts the relevant data, and issues a new message with the total point-in-time energy usage as a percentage of the last day&amp;rsquo;s max usage (it also saves all of the data so I can view it in Grafana). A Raspberry Pi Pico W in the NuVu meter listens for those messages and then changes the needle position and backlight color accordingly.&lt;/p&gt;
 &lt;h2 id=&#34;hardware&#34;&gt;Hardware&lt;/h2&gt;

@@ -6,9 +6,29 @@
     <description>Recent content in Tags on ascii graves</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 24 Sep 2024 00:00:00 -0500</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 21 Dec 2024 00:00:00 -0500</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Diy</title>
+      <title>selfhosting</title>
+      <link>/tags/selfhosting/</link>
+      <pubDate>Sat, 21 Dec 2024 00:00:00 -0500</pubDate>
+      
+      <guid>/tags/selfhosting/</guid>
+      <description></description>
+      <content></content>
+    </item>
+    
+    <item>
+      <title>tech</title>
+      <link>/tags/tech/</link>
+      <pubDate>Sat, 21 Dec 2024 00:00:00 -0500</pubDate>
+      
+      <guid>/tags/tech/</guid>
+      <description></description>
+      <content></content>
+    </item>
+    
+    <item>
+      <title>diy</title>
       <link>/tags/diy/</link>
       <pubDate>Tue, 24 Sep 2024 00:00:00 -0500</pubDate>
       
@@ -18,7 +38,7 @@
     </item>
     
     <item>
-      <title>Sewing</title>
+      <title>sewing</title>
       <link>/tags/sewing/</link>
       <pubDate>Tue, 24 Sep 2024 00:00:00 -0500</pubDate>
       
@@ -28,7 +48,7 @@
     </item>
     
     <item>
-      <title>Nds</title>
+      <title>nds</title>
       <link>/tags/nds/</link>
       <pubDate>Mon, 01 Jul 2024 12:15:03 -0500</pubDate>
       
@@ -38,17 +58,7 @@
     </item>
     
     <item>
-      <title>Tech</title>
-      <link>/tags/tech/</link>
-      <pubDate>Mon, 01 Jul 2024 12:15:03 -0500</pubDate>
-      
-      <guid>/tags/tech/</guid>
-      <description></description>
-      <content></content>
-    </item>
-    
-    <item>
-      <title>Electronics</title>
+      <title>electronics</title>
       <link>/tags/electronics/</link>
       <pubDate>Thu, 29 Feb 2024 06:00:00 -0500</pubDate>
       
@@ -58,7 +68,7 @@
     </item>
     
     <item>
-      <title>Iot</title>
+      <title>iot</title>
       <link>/tags/iot/</link>
       <pubDate>Thu, 29 Feb 2024 06:00:00 -0500</pubDate>
       
@@ -68,7 +78,7 @@
     </item>
     
     <item>
-      <title>Nostalgia</title>
+      <title>nostalgia</title>
       <link>/tags/nostalgia/</link>
       <pubDate>Tue, 23 Jan 2024 12:05:48 -0500</pubDate>
       
@@ -78,7 +88,7 @@
     </item>
     
     <item>
-      <title>Photos</title>
+      <title>photos</title>
       <link>/tags/photos/</link>
       <pubDate>Tue, 23 Jan 2024 12:05:48 -0500</pubDate>
       

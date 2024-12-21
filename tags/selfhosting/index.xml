@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>selfhosting on ascii graves</title>
+    <link>/tags/selfhosting/</link>
+    <description>Recent content in selfhosting on ascii graves</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 21 Dec 2024 00:00:00 -0500</lastBuildDate><atom:link href="/tags/selfhosting/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>2024 Self-Hosting Update</title>
+      <link>/posts/selfhosted-2024/</link>
+      <pubDate>Sat, 21 Dec 2024 00:00:00 -0500</pubDate>
+      
+      <guid>/posts/selfhosted-2024/</guid>
+      <description>I&amp;rsquo;m planning to make some changes to my self-hosting configuration in 2025, so I figured I would capture some details about my current set up for posterity.
+Services First, let&amp;rsquo;s take a look at the various services that I&amp;rsquo;m running. I&amp;rsquo;ve organized these by &amp;ldquo;purpose&amp;rdquo;, with a catch-all category at the end. It&amp;rsquo;s worth noting that none of these services are critical. If Home Assistant or Z-Wave JS are down, the lights in the house still work.</description>
+      <content>&lt;p&gt;I&amp;rsquo;m planning to make some changes to my self-hosting configuration in 2025, so I figured I would capture some details about my current set up for posterity.&lt;/p&gt;
+&lt;h2 id=&#34;services&#34;&gt;Services&lt;/h2&gt;
+&lt;p&gt;First, let&amp;rsquo;s take a look at the various services that I&amp;rsquo;m running. I&amp;rsquo;ve organized these by &amp;ldquo;purpose&amp;rdquo;, with a catch-all category at the end. It&amp;rsquo;s worth noting that none of these services are critical. If Home Assistant or Z-Wave JS are down, the lights in the house still work. If Pi-Hole DNS is down, the router uses a backup public DNS server. These services &lt;em&gt;do&lt;/em&gt; make my life better, but I can function without them.&lt;/p&gt;
+&lt;h4 id=&#34;media&#34;&gt;Media&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://jellyfin.org/&#34;&gt;Jellyfin&lt;/a&gt; for media streaming&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://wiki.servarr.com/&#34;&gt;*Arr Stack&lt;/a&gt; for media acquisition&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;home&#34;&gt;Home&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.home-assistant.io/&#34;&gt;Home Assistant&lt;/a&gt; for basic smart home controls&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://frigate.video/&#34;&gt;Frigate&lt;/a&gt; for security camera viewing and recording&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/zwave-js/zwave-js-ui&#34;&gt;Z-Wave JS&lt;/a&gt; for integration with z-wave devices&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;productivity&#34;&gt;Productivity&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://linkding.link/&#34;&gt;linkding&lt;/a&gt; for the SingleFile archiving feature&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://readeck.org/en/&#34;&gt;Readeck&lt;/a&gt; for a &amp;ldquo;read later&amp;rdquo; list&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://silverbullet.md/&#34;&gt;SilverBullet&lt;/a&gt; for notes, wiki, etc&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;supporting-services&#34;&gt;Supporting Services&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/garethgeorge/backrest&#34;&gt;Backrest&lt;/a&gt; for backups&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://filebrowser.org/&#34;&gt;File Browser&lt;/a&gt; for browsing archived PDFs and other files&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://about.gitea.com/&#34;&gt;Gitea&lt;/a&gt; for version control&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://grafana.com/&#34;&gt;Grafana&lt;/a&gt; for various home- and server-related dashboards&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://mosquitto.org/&#34;&gt;Mosquitto&lt;/a&gt; for MQTT integration in Frigate, Z-Wave JS, and others&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://nodered.org/&#34;&gt;Node-RED&lt;/a&gt; for several automated tasks based on schedules or MQTT triggers&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://pi-hole.net/&#34;&gt;Pi-Hole&lt;/a&gt; for network-wide ad blocking and custom DNS&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.postgresql.org/&#34;&gt;Postgres&lt;/a&gt; for storing data, specifically energy metrics&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.postgrest.org/en/v12/&#34;&gt;PostgREST&lt;/a&gt; for an easy way to send data to postgres from Node-RED&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://prometheus.io/&#34;&gt;Prometheus&lt;/a&gt; for storing metrics&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dperson/samba&#34;&gt;Samba&lt;/a&gt; for sharing files to Windows workstations&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://traefik.io/traefik/&#34;&gt;Traefik&lt;/a&gt; for reverse proxying requests via subdomains&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://woodpecker-ci.org/&#34;&gt;Woodpecker CI&lt;/a&gt; for building and deploying both code &lt;em&gt;and&lt;/em&gt; infrastructure&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;interesting-use-cases&#34;&gt;Interesting Use Cases&lt;/h2&gt;
+&lt;p&gt;Most of this stuff is pretty vanilla, but there are some interesting integrations that I&amp;rsquo;ve built over the years that might be slightly more novel.&lt;/p&gt;
+&lt;h4 id=&#34;reading-and-notetaking-pipeline&#34;&gt;Reading and Notetaking Pipeline&lt;/h4&gt;
+&lt;p&gt;I use Readeck to maintain a list of articles I want to read. When I have some downtime, I&amp;rsquo;ll pick something from the list and use the built-in reader mode to read and highlight articles. When I&amp;rsquo;m finished reading an article, I add a &amp;ldquo;recap&amp;rdquo; tag to it.&lt;/p&gt;
+&lt;p&gt;Each night, a Node-RED flow runs and looks for new articles in Readeck with the &amp;ldquo;recap&amp;rdquo; tag. If it finds one, it creates a new page in SilverBullet with links to the original article, the reader-mode version stored in Readeck, and all of the passages that I highlighted. The new page also gets a &amp;ldquo;torecap&amp;rdquo; tag, causing it to show up in a query on my SilverBullet homepage.&lt;/p&gt;
+&lt;p&gt;This workflow makes it really easy to find something to read, highlight important ideas, and then come back later to reflect on the content and take more detailed notes.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;reading-pipeline.png&#34; alt=&#34;A screenshot of a node-red pipeline&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;home-energy-monitoring&#34;&gt;Home Energy Monitoring&lt;/h4&gt;
+&lt;p&gt;I installed an &lt;a href=&#34;https://www.emporiaenergy.com/blog/introducing-emporia-vue/&#34;&gt;Emporia Vue 2&lt;/a&gt; so that I can record energy usage in my home at the circuit level. Thanks to some &lt;a href=&#34;https://flaviutamas.com/2021/reversing-emporia-vue-2&#34;&gt;smart people&lt;/a&gt; on the internet, I was able to reflash the device so that it connects to my local MQTT broker (Mosquitto).&lt;/p&gt;
+&lt;p&gt;A Node-RED flow picks up all messages sent via MQTT from the Vue 2 and POSTs them to PostgREST, storing them in a postgres database. At this point I have ~4GB of metrics spanning around 2 years.&lt;/p&gt;
+&lt;p&gt;I then built a Grafana dashboard that allows me to see energy consumption and estimated cost.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;energy-dashboard.png&#34; alt=&#34;A dashboard with several graphs indicating energy use over time as well as total cost&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;infrastructure-deployments&#34;&gt;Infrastructure Deployments&lt;/h4&gt;
+&lt;p&gt;I take a GitOps-based approach to my self-hosted infrastructure using a combination of Gitea, Woodpecker CI, and Ansible.&lt;/p&gt;
+&lt;p&gt;All of my services are deployed as Docker containers using Ansible&amp;rsquo;s &lt;code&gt;community.docker.docker_container&lt;/code&gt; module. I like Ansible because its vault allows me to commit encrypted secrets to the repo so that literally everything is in one spot.&lt;/p&gt;
+&lt;p&gt;Rather than running Ansible manually, I run it in a Woodpecker pipeline using the &lt;a href=&#34;https://registry.hub.docker.com/r/librespace/ansible&#34;&gt;librespace/ansible&lt;/a&gt; image. I pass docker.sock and some file paths through to the Woodpecker runner container as volumes so that Ansible can interact with Docker on the host machine. Deploying a new container is as easy as adding a new YAML file to the repo and pushing. Woodpecker will run the pipeline and deploy the new container via Ansible.&lt;/p&gt;
+&lt;p&gt;It&amp;rsquo;s a little janky and terribly insecure, but it&amp;rsquo;s easy to set up and has served me well.&lt;/p&gt;
+&lt;h2 id=&#34;hardware&#34;&gt;Hardware&lt;/h2&gt;
+&lt;p&gt;I have a single desktop PC from ~2013 running all of my self-hosted services. It has an i5-4670K CPU and 16 GB of RAM. I also have a Z-Wave USB dongle for home automation and a Google Coral TPU USB dongle for Frigate&amp;rsquo;s object detection functionality.&lt;/p&gt;
+&lt;p&gt;For storage I have a 120 GB SSD boot drive, a 2 TB SSD for &amp;ldquo;normal&amp;rdquo; storage, and a 2 TB HDD for security camera recordings. Disk redundancy is on my to-do list for 2025.&lt;/p&gt;
+&lt;p&gt;Overall the system performs quite well for the workload. Offloading the object detection to the Coral TPU saves a ton of CPU.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;system-load.png&#34; alt=&#34;a chart showing moderately low system load over the past seven days&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;looking-forward&#34;&gt;Looking Forward&lt;/h2&gt;
+&lt;p&gt;I&amp;rsquo;d like to focus on two areas for improvement in 2025 - hardware and deployments.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m hoping to build out a new &amp;ldquo;server&amp;rdquo; for the services I&amp;rsquo;ve listed above. I&amp;rsquo;m not looking at anything too new or fancy, just a slightly newer CPU, a little more RAM, and some additional disks probably running ZFS for better redundancy.&lt;/p&gt;
+&lt;p&gt;If I can get that new machine in place, I&amp;rsquo;d like to repurpose the old PC as a true lab machine. I&amp;rsquo;ll probably install proxmox so that I can virtualize windows and linux as necessary for research projects.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;d also like to replace my Gitea/Woodpecker/Ansible set up for infrastructure deployments. I currently have my eye on &lt;a href=&#34;https://komo.do/&#34;&gt;Komodo&lt;/a&gt;. Hopefully I can use its &lt;a href=&#34;https://komo.do/docs/sync-resources&#34;&gt;resource syncing&lt;/a&gt; feature to keep all of the configuration in version control like I have now. Not 100% sure how I&amp;rsquo;ll handle secrets yet, so if you have any ideas - let me know!&lt;/p&gt;
+</content>
+    </item>
+    
+  </channel>
+</rss>
