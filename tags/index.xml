@@ -6,13 +6,13 @@
     <description>Recent content in Tags on ascii graves</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 21 Dec 2024 00:00:00 -0500</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 24 Dec 2024 00:00:00 -0500</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>selfhosting</title>
-      <link>/tags/selfhosting/</link>
-      <pubDate>Sat, 21 Dec 2024 00:00:00 -0500</pubDate>
+      <title>iot</title>
+      <link>/tags/iot/</link>
+      <pubDate>Tue, 24 Dec 2024 00:00:00 -0500</pubDate>
       
-      <guid>/tags/selfhosting/</guid>
+      <guid>/tags/iot/</guid>
       <description></description>
       <content></content>
     </item>
@@ -20,9 +20,19 @@
     <item>
       <title>tech</title>
       <link>/tags/tech/</link>
-      <pubDate>Sat, 21 Dec 2024 00:00:00 -0500</pubDate>
+      <pubDate>Tue, 24 Dec 2024 00:00:00 -0500</pubDate>
       
       <guid>/tags/tech/</guid>
+      <description></description>
+      <content></content>
+    </item>
+    
+    <item>
+      <title>selfhosting</title>
+      <link>/tags/selfhosting/</link>
+      <pubDate>Sat, 21 Dec 2024 00:00:00 -0500</pubDate>
+      
+      <guid>/tags/selfhosting/</guid>
       <description></description>
       <content></content>
     </item>
@@ -63,16 +73,6 @@
       <pubDate>Thu, 29 Feb 2024 06:00:00 -0500</pubDate>
       
       <guid>/tags/electronics/</guid>
-      <description></description>
-      <content></content>
-    </item>
-    
-    <item>
-      <title>iot</title>
-      <link>/tags/iot/</link>
-      <pubDate>Thu, 29 Feb 2024 06:00:00 -0500</pubDate>
-      
-      <guid>/tags/iot/</guid>
       <description></description>
       <content></content>
     </item>

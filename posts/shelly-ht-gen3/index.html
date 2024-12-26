@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>Shelly H&amp;T Gen3 Integration :: ascii graves</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="I recently picked up two Shelly H&amp;amp;T Gen3 temperature and humidity sensors to help evaluate temperature differences between a few rooms in the house. I really like products that put me in control - the Shelly sensor is easily configured over wifi without creating an account, and it supports self-hosted MQTT brokers. 10/10, would buy again.
+That said, there are some wrinkles. I want to walk through my initial integration and explain the drawbacks." />
+<meta name="keywords" content="" />
+
+  <meta name="robots" content="noodp" />
+
+<link rel="canonical" href="/posts/shelly-ht-gen3/" />
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/styles.css">
+
+
+
+
+
+
+
+  <link rel="shortcut icon" href="/img/theme-colors/blue.png">
+  <link rel="apple-touch-icon" href="/img/theme-colors/blue.png">
+
+
+
+<meta name="twitter:card" content="summary" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Shelly H&amp;T Gen3 Integration">
+<meta property="og:description" content="I recently picked up two Shelly H&amp;amp;T Gen3 temperature and humidity sensors to help evaluate temperature differences between a few rooms in the house. I really like products that put me in control - the Shelly sensor is easily configured over wifi without creating an account, and it supports self-hosted MQTT brokers. 10/10, would buy again.
+That said, there are some wrinkles. I want to walk through my initial integration and explain the drawbacks." />
+<meta property="og:url" content="/posts/shelly-ht-gen3/" />
+<meta property="og:site_name" content="ascii graves" />
+
+  
+  
+    
+  
+  <meta property="og:image" content="/posts/shelly-ht-gen3/shelly-htg.jpg">
+
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+
+
+  <meta property="article:published_time" content="2024-12-24 00:00:00 -0500 -0500" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body class="blue">
+
+
+<div class="container center headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    ascii graves
+  </div>
+</a>
+
+    </div>
+    
+      <ul class="menu menu--mobile">
+  <li class="menu__trigger">Menu&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+      
+        
+          <li><a href="/about">About</a></li>
+        
+      
+        
+          <li><a href="/">Posts</a></li>
+        
+      
+        
+          <li><a href="/tags">Tags</a></li>
+        
+      
+      
+    </ul>
+  </li>
+</ul>
+
+    
+    
+  </div>
+  
+    <nav class="navigation-menu">
+  <ul class="navigation-menu__inner menu--desktop">
+    
+      
+        
+          <li><a href="/about" >About</a></li>
+        
+      
+        
+          <li><a href="/" >Posts</a></li>
+        
+      
+        
+          <li><a href="/tags" >Tags</a></li>
+        
+      
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+<article class="post">
+  <h1 class="post-title">
+    <a href="/posts/shelly-ht-gen3/">Shelly H&amp;T Gen3 Integration</a>
+  </h1>
+  <div class="post-meta"><time class="post-date">2024-12-24</time></div>
+
+  
+    <span class="post-tags">
+      
+      #<a href="/tags/tech/">tech</a>&nbsp;
+      
+      #<a href="/tags/iot/">iot</a>&nbsp;
+      
+    </span>
+  
+  
+  <img src="/posts/shelly-ht-gen3/shelly-htg.jpg"
+    class="post-cover"
+    alt="Shelly H&amp;T Gen3 Integration"
+    title="Cover Image" />
+
+
+  
+
+  <div class="post-content"><div>
+        <p>I recently picked up two <a href="https://us.shelly.com/products/shelly-h-t-gen3-matte-black">Shelly H&amp;T Gen3</a> temperature and humidity sensors to help evaluate temperature differences between a few rooms in the house. I really like products that put me in control - the Shelly sensor is easily configured over wifi without creating an account, <em>and</em> it supports self-hosted MQTT brokers. 10/10, would buy again.</p>
+<p>That said, there are some wrinkles. I want to walk through my initial integration and explain the drawbacks. Then we&rsquo;ll look at where I ultimately ended up.</p>
+<h2 id="initial-attempt">Initial Attempt<a href="#initial-attempt" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>My standard pipeline for ingesting metrics via MQTT is:</p>
+<p><code>MQTT -&gt; Node-RED -&gt; PostgREST -&gt; Postgres -&gt; Grafana</code></p>
+<p>This works really well for my Emporia Vue 2 energy monitor as detailed <a href="http://localhost:1313/posts/selfhosted-2024/#home-energy-monitoring">here</a>. In that case, the Vue sends a single message containing all metrics. The Shelly H&amp;T, however, sends distinct messages for temperature and humidity readings (among other things):</p>
+<p><img src="./mqtt-messages.png" alt="A screenshot of MQTTExplorer showing the various messages sent by a Shelly H&amp;T"></p>
+<p>Having two sensor units also means that there are a total of four MQTT topics that I actually need to listen to, so my Node-RED flow looks like this:</p>
+<p><img src="./initial-flow.png" alt="A screenshot of four identical pipelines in a node-red flow"></p>
+<p>As a consequence, I can&rsquo;t reliably store a given reading for both rooms at the same time. Where my energy metrics table looks like this&hellip;</p>
+<table>
+<thead>
+<tr>
+<th>Timestamp</th>
+<th>Family Room</th>
+<th>Office</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2024-12-24T00:00</td>
+<td>240</td>
+<td>110</td>
+</tr>
+<tr>
+<td>2024-12-24T00:01</td>
+<td>200</td>
+<td>105</td>
+</tr>
+<tr>
+<td>2024-12-24T00:02</td>
+<td>210</td>
+<td>107</td>
+</tr>
+</tbody>
+</table>
+<p>&hellip;I&rsquo;m forced to store my temperature metrics like this:</p>
+<table>
+<thead>
+<tr>
+<th>Timestamp</th>
+<th>Temperature</th>
+<th>Room</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2024-12-24T00:01</td>
+<td>65</td>
+<td>Family Room</td>
+</tr>
+<tr>
+<td>2024-12-24T00:01</td>
+<td>77</td>
+<td>Office</td>
+</tr>
+<tr>
+<td>2024-12-24T00:02</td>
+<td>66</td>
+<td>Family Room</td>
+</tr>
+<tr>
+<td>2024-12-24T00:02</td>
+<td>76</td>
+<td>Office</td>
+</tr>
+</tbody>
+</table>
+<p>Now you might be thinking, &ldquo;wait, the second option is definitely better!&rdquo;, and in a &ldquo;normal&rdquo; (pun intended) database, you&rsquo;d be right. But that makes building the Grafana dashboards more difficult and also means I need to include two columns in the index (timestamp and room) instead of just one (timestamp).</p>
+<p>And one final gripe - the Shelly H&amp;T only sends out MQTT messages when the temperature or humidity changes by at least 0.5 units (either degrees C or percent, depending on the metric). That&rsquo;s great for saving power, but makes the rate of updates inconsistent between rooms.</p>
+<p><img src="./annoying-charts.png" alt="A chart with inconsistent updates along the x axis"></p>
+<h2 id="second-attempt">Second Attempt<a href="#second-attempt" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>Instead of pushing metrics to PostgREST/Postgres each time a message is received, I decided to store the value in a flow-scoped variable. When a new message is received, it updates the value held in one of the four variables - temp1, humidity1, temp2, humidity2.</p>
+<p>Then, once a minute, a separate pipeline reads the values of those variables and sends the data to PostgREST. This has the potential to introduce a <em>tiny</em> amount of delay between when a value changes and when the change is actually recorded, but in my testing so far, the values don&rsquo;t change very frequently at all.</p>
+<p>Here&rsquo;s the new flow:</p>
+<p><img src="./second-flow.png" alt="A screenshot of a Node-RED flow that&rsquo;s a bit simpler than the last one"></p>
+<p>With this flow in place, I can now use the same timeseries database structure that I use for energy readings which makes the Grafana dashboard a piece of cake!</p>
+<p><img src="./better-charts.png" alt="A screenshot of a grafana dashboard showing humidity and temperature with even intervals and no gaps"></p>
+<p>Overall I&rsquo;m happy with my purchase of the Shelly H&amp;T Gen3. It was relatively cheap and fits into my existing infrastructure easily.</p>
+
+      </div></div>
+
+  
+
+  
+    
+
+  
+</article>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2024 Powered by <a href="https://gohugo.io">Hugo</a></span>
+    
+      <span>:: <a href="https://github.com/panr/hugo-theme-terminal" target="_blank">Theme</a> made by <a href="https://github.com/panr" target="_blank">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+
+
+
+
+
+<script type="text/javascript" src="/bundle.min.js"></script>
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>

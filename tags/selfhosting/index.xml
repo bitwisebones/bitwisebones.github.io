@@ -49,7 +49,7 @@ Services First, let&amp;rsquo;s take a look at the various services that I&amp;r
 &lt;li&gt;&lt;a href=&#34;https://prometheus.io/&#34;&gt;Prometheus&lt;/a&gt; for storing metrics&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/dperson/samba&#34;&gt;Samba&lt;/a&gt; for sharing files to Windows workstations&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://traefik.io/traefik/&#34;&gt;Traefik&lt;/a&gt; for reverse proxying requests via subdomains&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://woodpecker-ci.org/&#34;&gt;Woodpecker CI&lt;/a&gt; for building and deploying both code &lt;em&gt;and&lt;/em&gt; infrastructure&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://woodpecker-ci.org/&#34;&gt;Woodpecker CI&lt;/a&gt; for building and deploying services&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;interesting-use-cases&#34;&gt;Interesting Use Cases&lt;/h2&gt;
 &lt;p&gt;Most of this stuff is pretty vanilla, but there are some interesting integrations that I&amp;rsquo;ve built over the years that might be slightly more novel.&lt;/p&gt;
@@ -63,8 +63,8 @@ Services First, let&amp;rsquo;s take a look at the various services that I&amp;r
 &lt;p&gt;A Node-RED flow picks up all messages sent via MQTT from the Vue 2 and POSTs them to PostgREST, storing them in a postgres database. At this point I have ~4GB of metrics spanning around 2 years.&lt;/p&gt;
 &lt;p&gt;I then built a Grafana dashboard that allows me to see energy consumption and estimated cost.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;energy-dashboard.png&#34; alt=&#34;A dashboard with several graphs indicating energy use over time as well as total cost&#34;&gt;&lt;/p&gt;
-&lt;h4 id=&#34;infrastructure-deployments&#34;&gt;Infrastructure Deployments&lt;/h4&gt;
-&lt;p&gt;I take a GitOps-based approach to my self-hosted infrastructure using a combination of Gitea, Woodpecker CI, and Ansible.&lt;/p&gt;
+&lt;h4 id=&#34;service-deployments&#34;&gt;Service Deployments&lt;/h4&gt;
+&lt;p&gt;I take a GitOps-based approach to my self-hosted services using a combination of Gitea, Woodpecker CI, and Ansible.&lt;/p&gt;
 &lt;p&gt;All of my services are deployed as Docker containers using Ansible&amp;rsquo;s &lt;code&gt;community.docker.docker_container&lt;/code&gt; module. I like Ansible because its vault allows me to commit encrypted secrets to the repo so that literally everything is in one spot.&lt;/p&gt;
 &lt;p&gt;Rather than running Ansible manually, I run it in a Woodpecker pipeline using the &lt;a href=&#34;https://registry.hub.docker.com/r/librespace/ansible&#34;&gt;librespace/ansible&lt;/a&gt; image. I pass docker.sock and some file paths through to the Woodpecker runner container as volumes so that Ansible can interact with Docker on the host machine. Deploying a new container is as easy as adding a new YAML file to the repo and pushing. Woodpecker will run the pipeline and deploy the new container via Ansible.&lt;/p&gt;
 &lt;p&gt;It&amp;rsquo;s a little janky and terribly insecure, but it&amp;rsquo;s easy to set up and has served me well.&lt;/p&gt;
@@ -77,7 +77,7 @@ Services First, let&amp;rsquo;s take a look at the various services that I&amp;r
 &lt;p&gt;I&amp;rsquo;d like to focus on two areas for improvement in 2025 - hardware and deployments.&lt;/p&gt;
 &lt;p&gt;I&amp;rsquo;m hoping to build out a new &amp;ldquo;server&amp;rdquo; for the services I&amp;rsquo;ve listed above. I&amp;rsquo;m not looking at anything too new or fancy, just a slightly newer CPU, a little more RAM, and some additional disks probably running ZFS for better redundancy.&lt;/p&gt;
 &lt;p&gt;If I can get that new machine in place, I&amp;rsquo;d like to repurpose the old PC as a true lab machine. I&amp;rsquo;ll probably install proxmox so that I can virtualize windows and linux as necessary for research projects.&lt;/p&gt;
-&lt;p&gt;I&amp;rsquo;d also like to replace my Gitea/Woodpecker/Ansible set up for infrastructure deployments. I currently have my eye on &lt;a href=&#34;https://komo.do/&#34;&gt;Komodo&lt;/a&gt;. Hopefully I can use its &lt;a href=&#34;https://komo.do/docs/sync-resources&#34;&gt;resource syncing&lt;/a&gt; feature to keep all of the configuration in version control like I have now. Not 100% sure how I&amp;rsquo;ll handle secrets yet, so if you have any ideas - let me know!&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;d also like to replace my Gitea/Woodpecker/Ansible set up for deployments. I currently have my eye on &lt;a href=&#34;https://komo.do/&#34;&gt;Komodo&lt;/a&gt;. Hopefully I can use its &lt;a href=&#34;https://komo.do/docs/sync-resources&#34;&gt;resource syncing&lt;/a&gt; feature to keep all of the configuration in version control like I have now. Not 100% sure how I&amp;rsquo;ll handle secrets yet, so if you have any ideas - let me know!&lt;/p&gt;
 </content>
     </item>
     

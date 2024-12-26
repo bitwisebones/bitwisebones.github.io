@@ -6,7 +6,97 @@
     <description>Recent content in iot on ascii graves</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 29 Feb 2024 06:00:00 -0500</lastBuildDate><atom:link href="/tags/iot/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 24 Dec 2024 00:00:00 -0500</lastBuildDate><atom:link href="/tags/iot/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Shelly H&amp;T Gen3 Integration</title>
+      <link>/posts/shelly-ht-gen3/</link>
+      <pubDate>Tue, 24 Dec 2024 00:00:00 -0500</pubDate>
+      
+      <guid>/posts/shelly-ht-gen3/</guid>
+      <description>I recently picked up two Shelly H&amp;amp;T Gen3 temperature and humidity sensors to help evaluate temperature differences between a few rooms in the house. I really like products that put me in control - the Shelly sensor is easily configured over wifi without creating an account, and it supports self-hosted MQTT brokers. 10/10, would buy again.
+That said, there are some wrinkles. I want to walk through my initial integration and explain the drawbacks.</description>
+      <content>&lt;p&gt;I recently picked up two &lt;a href=&#34;https://us.shelly.com/products/shelly-h-t-gen3-matte-black&#34;&gt;Shelly H&amp;amp;T Gen3&lt;/a&gt; temperature and humidity sensors to help evaluate temperature differences between a few rooms in the house. I really like products that put me in control - the Shelly sensor is easily configured over wifi without creating an account, &lt;em&gt;and&lt;/em&gt; it supports self-hosted MQTT brokers. 10/10, would buy again.&lt;/p&gt;
+&lt;p&gt;That said, there are some wrinkles. I want to walk through my initial integration and explain the drawbacks. Then we&amp;rsquo;ll look at where I ultimately ended up.&lt;/p&gt;
+&lt;h2 id=&#34;initial-attempt&#34;&gt;Initial Attempt&lt;/h2&gt;
+&lt;p&gt;My standard pipeline for ingesting metrics via MQTT is:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;MQTT -&amp;gt; Node-RED -&amp;gt; PostgREST -&amp;gt; Postgres -&amp;gt; Grafana&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;This works really well for my Emporia Vue 2 energy monitor as detailed &lt;a href=&#34;http://localhost:1313/posts/selfhosted-2024/#home-energy-monitoring&#34;&gt;here&lt;/a&gt;. In that case, the Vue sends a single message containing all metrics. The Shelly H&amp;amp;T, however, sends distinct messages for temperature and humidity readings (among other things):&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./mqtt-messages.png&#34; alt=&#34;A screenshot of MQTTExplorer showing the various messages sent by a Shelly H&amp;amp;T&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Having two sensor units also means that there are a total of four MQTT topics that I actually need to listen to, so my Node-RED flow looks like this:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./initial-flow.png&#34; alt=&#34;A screenshot of four identical pipelines in a node-red flow&#34;&gt;&lt;/p&gt;
+&lt;p&gt;As a consequence, I can&amp;rsquo;t reliably store a given reading for both rooms at the same time. Where my energy metrics table looks like this&amp;hellip;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Timestamp&lt;/th&gt;
+&lt;th&gt;Family Room&lt;/th&gt;
+&lt;th&gt;Office&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;2024-12-24T00:00&lt;/td&gt;
+&lt;td&gt;240&lt;/td&gt;
+&lt;td&gt;110&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;2024-12-24T00:01&lt;/td&gt;
+&lt;td&gt;200&lt;/td&gt;
+&lt;td&gt;105&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;2024-12-24T00:02&lt;/td&gt;
+&lt;td&gt;210&lt;/td&gt;
+&lt;td&gt;107&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&amp;hellip;I&amp;rsquo;m forced to store my temperature metrics like this:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Timestamp&lt;/th&gt;
+&lt;th&gt;Temperature&lt;/th&gt;
+&lt;th&gt;Room&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;2024-12-24T00:01&lt;/td&gt;
+&lt;td&gt;65&lt;/td&gt;
+&lt;td&gt;Family Room&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;2024-12-24T00:01&lt;/td&gt;
+&lt;td&gt;77&lt;/td&gt;
+&lt;td&gt;Office&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;2024-12-24T00:02&lt;/td&gt;
+&lt;td&gt;66&lt;/td&gt;
+&lt;td&gt;Family Room&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;2024-12-24T00:02&lt;/td&gt;
+&lt;td&gt;76&lt;/td&gt;
+&lt;td&gt;Office&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Now you might be thinking, &amp;ldquo;wait, the second option is definitely better!&amp;rdquo;, and in a &amp;ldquo;normal&amp;rdquo; (pun intended) database, you&amp;rsquo;d be right. But that makes building the Grafana dashboards more difficult and also means I need to include two columns in the index (timestamp and room) instead of just one (timestamp).&lt;/p&gt;
+&lt;p&gt;And one final gripe - the Shelly H&amp;amp;T only sends out MQTT messages when the temperature or humidity changes by at least 0.5 units (either degrees C or percent, depending on the metric). That&amp;rsquo;s great for saving power, but makes the rate of updates inconsistent between rooms.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./annoying-charts.png&#34; alt=&#34;A chart with inconsistent updates along the x axis&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;second-attempt&#34;&gt;Second Attempt&lt;/h2&gt;
+&lt;p&gt;Instead of pushing metrics to PostgREST/Postgres each time a message is received, I decided to store the value in a flow-scoped variable. When a new message is received, it updates the value held in one of the four variables - temp1, humidity1, temp2, humidity2.&lt;/p&gt;
+&lt;p&gt;Then, once a minute, a separate pipeline reads the values of those variables and sends the data to PostgREST. This has the potential to introduce a &lt;em&gt;tiny&lt;/em&gt; amount of delay between when a value changes and when the change is actually recorded, but in my testing so far, the values don&amp;rsquo;t change very frequently at all.&lt;/p&gt;
+&lt;p&gt;Here&amp;rsquo;s the new flow:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./second-flow.png&#34; alt=&#34;A screenshot of a Node-RED flow that&amp;rsquo;s a bit simpler than the last one&#34;&gt;&lt;/p&gt;
+&lt;p&gt;With this flow in place, I can now use the same timeseries database structure that I use for energy readings which makes the Grafana dashboard a piece of cake!&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./better-charts.png&#34; alt=&#34;A screenshot of a grafana dashboard showing humidity and temperature with even intervals and no gaps&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Overall I&amp;rsquo;m happy with my purchase of the Shelly H&amp;amp;T Gen3. It was relatively cheap and fits into my existing infrastructure easily.&lt;/p&gt;
+</content>
+    </item>
+    
     <item>
       <title>NuVu Meter</title>
       <link>/posts/nuvu-meter/</link>

@@ -194,7 +194,7 @@ Services First, let&amp;rsquo;s take a look at the various services that I&amp;r
 <li><a href="https://prometheus.io/">Prometheus</a> for storing metrics</li>
 <li><a href="https://github.com/dperson/samba">Samba</a> for sharing files to Windows workstations</li>
 <li><a href="https://traefik.io/traefik/">Traefik</a> for reverse proxying requests via subdomains</li>
-<li><a href="https://woodpecker-ci.org/">Woodpecker CI</a> for building and deploying both code <em>and</em> infrastructure</li>
+<li><a href="https://woodpecker-ci.org/">Woodpecker CI</a> for building and deploying services</li>
 </ul>
 <h2 id="interesting-use-cases">Interesting Use Cases<a href="#interesting-use-cases" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
 <p>Most of this stuff is pretty vanilla, but there are some interesting integrations that I&rsquo;ve built over the years that might be slightly more novel.</p>
@@ -208,8 +208,8 @@ Services First, let&amp;rsquo;s take a look at the various services that I&amp;r
 <p>A Node-RED flow picks up all messages sent via MQTT from the Vue 2 and POSTs them to PostgREST, storing them in a postgres database. At this point I have ~4GB of metrics spanning around 2 years.</p>
 <p>I then built a Grafana dashboard that allows me to see energy consumption and estimated cost.</p>
 <p><img src="energy-dashboard.png" alt="A dashboard with several graphs indicating energy use over time as well as total cost"></p>
-<h4 id="infrastructure-deployments">Infrastructure Deployments<a href="#infrastructure-deployments" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h4>
-<p>I take a GitOps-based approach to my self-hosted infrastructure using a combination of Gitea, Woodpecker CI, and Ansible.</p>
+<h4 id="service-deployments">Service Deployments<a href="#service-deployments" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h4>
+<p>I take a GitOps-based approach to my self-hosted services using a combination of Gitea, Woodpecker CI, and Ansible.</p>
 <p>All of my services are deployed as Docker containers using Ansible&rsquo;s <code>community.docker.docker_container</code> module. I like Ansible because its vault allows me to commit encrypted secrets to the repo so that literally everything is in one spot.</p>
 <p>Rather than running Ansible manually, I run it in a Woodpecker pipeline using the <a href="https://registry.hub.docker.com/r/librespace/ansible">librespace/ansible</a> image. I pass docker.sock and some file paths through to the Woodpecker runner container as volumes so that Ansible can interact with Docker on the host machine. Deploying a new container is as easy as adding a new YAML file to the repo and pushing. Woodpecker will run the pipeline and deploy the new container via Ansible.</p>
 <p>It&rsquo;s a little janky and terribly insecure, but it&rsquo;s easy to set up and has served me well.</p>
@@ -222,7 +222,7 @@ Services First, let&amp;rsquo;s take a look at the various services that I&amp;r
 <p>I&rsquo;d like to focus on two areas for improvement in 2025 - hardware and deployments.</p>
 <p>I&rsquo;m hoping to build out a new &ldquo;server&rdquo; for the services I&rsquo;ve listed above. I&rsquo;m not looking at anything too new or fancy, just a slightly newer CPU, a little more RAM, and some additional disks probably running ZFS for better redundancy.</p>
 <p>If I can get that new machine in place, I&rsquo;d like to repurpose the old PC as a true lab machine. I&rsquo;ll probably install proxmox so that I can virtualize windows and linux as necessary for research projects.</p>
-<p>I&rsquo;d also like to replace my Gitea/Woodpecker/Ansible set up for infrastructure deployments. I currently have my eye on <a href="https://komo.do/">Komodo</a>. Hopefully I can use its <a href="https://komo.do/docs/sync-resources">resource syncing</a> feature to keep all of the configuration in version control like I have now. Not 100% sure how I&rsquo;ll handle secrets yet, so if you have any ideas - let me know!</p>
+<p>I&rsquo;d also like to replace my Gitea/Woodpecker/Ansible set up for deployments. I currently have my eye on <a href="https://komo.do/">Komodo</a>. Hopefully I can use its <a href="https://komo.do/docs/sync-resources">resource syncing</a> feature to keep all of the configuration in version control like I have now. Not 100% sure how I&rsquo;ll handle secrets yet, so if you have any ideas - let me know!</p>
 
       </div></div>
 
