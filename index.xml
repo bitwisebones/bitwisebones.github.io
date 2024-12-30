@@ -356,47 +356,10 @@ At a high level, I have an Emporia Vue 2 that publishes energy readings to a sel
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/about/</guid>
-      <description>Above: my professional portrait
-Find Me GitHub: bitwisebones Mastodon: bitwisebones Email: bitwisebones at gmail Work Over the last decade as a professional developer, I&amp;rsquo;ve worked on many different types of applications, including:
-CMS-managed websites Ecommerce Real-time distributed systems LOB/ERP Mobile And I&amp;rsquo;ve used a variety of technologies, including:
-Old things I&amp;rsquo;d rather forget: PHP ColdFusion/Java Node.js, AngularJS, JavaScript New(er) things that I find enjoyable and productive: C# (WPF, ASP.NET) React(JS|Native), TypeScript SQL Server, Redis, RabbitMQ In recent years my role has transitioned from IC to management, though I still read and write code most days.</description>
-      <content>&lt;p&gt;&lt;img src=&#34;cecil.jpg&#34; alt=&#34;Image of a computer with a face&#34;&gt;
-&lt;em&gt;Above: my professional portrait&lt;/em&gt;&lt;/p&gt;
-&lt;h2 id=&#34;find-me&#34;&gt;Find Me&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;GitHub: &lt;a href=&#34;https://github.com/bitwisebones&#34;&gt;bitwisebones&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Mastodon: &lt;a href=&#34;https://mastodon.gamedev.place/@bitwisebones&#34;&gt;bitwisebones&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Email: bitwisebones at gmail&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;work&#34;&gt;Work&lt;/h2&gt;
-&lt;p&gt;Over the last decade as a professional developer, I&amp;rsquo;ve worked on many different types of applications, including:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;CMS-managed websites&lt;/li&gt;
-&lt;li&gt;Ecommerce&lt;/li&gt;
-&lt;li&gt;Real-time distributed systems&lt;/li&gt;
-&lt;li&gt;LOB/ERP&lt;/li&gt;
-&lt;li&gt;Mobile&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;And I&amp;rsquo;ve used a variety of technologies, including:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Old things I&amp;rsquo;d rather forget:
-&lt;ul&gt;
-&lt;li&gt;PHP&lt;/li&gt;
-&lt;li&gt;ColdFusion/Java&lt;/li&gt;
-&lt;li&gt;Node.js, AngularJS, JavaScript&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;New(er) things that I find enjoyable and productive:
-&lt;ul&gt;
-&lt;li&gt;C# (WPF, ASP.NET)&lt;/li&gt;
-&lt;li&gt;React(JS|Native), TypeScript&lt;/li&gt;
-&lt;li&gt;SQL Server, Redis, RabbitMQ&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;In recent years my role has transitioned from IC to management, though I still read and write code most days.&lt;/p&gt;
-&lt;h2 id=&#34;not-work&#34;&gt;Not Work&lt;/h2&gt;
-&lt;p&gt;I do a lot of random things in short bursts with long periods of burnout in between.&lt;/p&gt;
+      <description>I do a lot of random things in short bursts with long periods of burnout in between.
+Things I do (or have done) and enjoy(ed), in no particular order:
+Game development (Godot, Unity, Raylib, Sokol) Reverse engineering of any kind (software, firmware, hardware) Programming language theory and design Learning new programming languages (Forth, Clojure, Zig) Electronics, PCB design, soldering Self-hosting, smart home stuff 3d printing, laser cutting TTRPGs (playing, DMing, creating) Lapidary, geology, rockhounding Gardening Find Me GitHub: bitwisebones Mastodon: bitwisebones Email: bitwisebones at gmail </description>
+      <content>&lt;p&gt;I do a lot of random things in short bursts with long periods of burnout in between.&lt;/p&gt;
 &lt;p&gt;Things I do (or have done) and enjoy(ed), in no particular order:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Game development (Godot, Unity, Raylib, Sokol)&lt;/li&gt;
@@ -404,10 +367,17 @@ Old things I&amp;rsquo;d rather forget: PHP ColdFusion/Java Node.js, AngularJS, 
 &lt;li&gt;Programming language theory and design&lt;/li&gt;
 &lt;li&gt;Learning new programming languages (Forth, Clojure, Zig)&lt;/li&gt;
 &lt;li&gt;Electronics, PCB design, soldering&lt;/li&gt;
+&lt;li&gt;Self-hosting, smart home stuff&lt;/li&gt;
 &lt;li&gt;3d printing, laser cutting&lt;/li&gt;
 &lt;li&gt;TTRPGs (playing, DMing, creating)&lt;/li&gt;
 &lt;li&gt;Lapidary, geology, rockhounding&lt;/li&gt;
 &lt;li&gt;Gardening&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;find-me&#34;&gt;Find Me&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;GitHub: &lt;a href=&#34;https://github.com/bitwisebones&#34;&gt;bitwisebones&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Mastodon: &lt;a href=&#34;https://mastodon.gamedev.place/@bitwisebones&#34;&gt;bitwisebones&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Email: bitwisebones at gmail&lt;/li&gt;
 &lt;/ul&gt;
 </content>
     </item>
