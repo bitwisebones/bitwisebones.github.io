@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>Workspace 2025 Part 2: The Switch :: ascii graves</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="As discussed in Part 1, I need the ability to switch the inputs on two KVMs and two USB switches that aren&amp;rsquo;t physically on my desk.
+Previously, I had a hacked together setup to remotely trigger my single KVM and single USB switch:
+The mechanical keyboard switches on the left were wired (via ethernet twisted pairs) to a) the remote for my KVM and b) a jack that I soldered onto the button of the USB switch." />
+<meta name="keywords" content="" />
+
+  <meta name="robots" content="noodp" />
+
+<link rel="canonical" href="/posts/workspace-2025-part-2/" />
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/styles.css">
+
+
+
+
+
+
+
+  <link rel="shortcut icon" href="/img/theme-colors/blue.png">
+  <link rel="apple-touch-icon" href="/img/theme-colors/blue.png">
+
+
+
+<meta name="twitter:card" content="summary" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Workspace 2025 Part 2: The Switch">
+<meta property="og:description" content="As discussed in Part 1, I need the ability to switch the inputs on two KVMs and two USB switches that aren&amp;rsquo;t physically on my desk.
+Previously, I had a hacked together setup to remotely trigger my single KVM and single USB switch:
+The mechanical keyboard switches on the left were wired (via ethernet twisted pairs) to a) the remote for my KVM and b) a jack that I soldered onto the button of the USB switch." />
+<meta property="og:url" content="/posts/workspace-2025-part-2/" />
+<meta property="og:site_name" content="ascii graves" />
+
+  
+    <meta property="og:image" content="/img/favicon/blue.png">
+  
+
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+
+
+  <meta property="article:published_time" content="2025-01-22 00:00:00 -0400 -0400" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body class="blue">
+
+
+<div class="container center headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    ascii graves
+  </div>
+</a>
+
+    </div>
+    
+      
+    
+    
+  </div>
+  
+    <nav class="navigation-menu">
+  <ul class="navigation-menu__inner menu--desktop">
+    
+      
+        
+          <li><a href="/about" >About</a></li>
+        
+      
+        
+          <li><a href="/" >Posts</a></li>
+        
+      
+        
+          <li><a href="/tags" >Tags</a></li>
+        
+      
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+<article class="post">
+  <h1 class="post-title">
+    <a href="/posts/workspace-2025-part-2/">Workspace 2025 Part 2: The Switch</a>
+  </h1>
+  <div class="post-meta"><time class="post-date">2025-01-22</time></div>
+
+  
+    <span class="post-tags">
+      
+      #<a href="/tags/diy/">diy</a>&nbsp;
+      
+      #<a href="/tags/electronics/">electronics</a>&nbsp;
+      
+      #<a href="/tags/tech/">tech</a>&nbsp;
+      
+    </span>
+  
+  
+
+
+  
+
+  <div class="post-content"><div>
+        <p>As discussed in <a href="/posts/workspace-2025-part-1/">Part 1</a>, I need the ability to switch the inputs on two KVMs and two USB switches that aren&rsquo;t physically on my desk.</p>
+<p>Previously, I had a hacked together setup to remotely trigger my single KVM and single USB switch:</p>
+<p><img src="./messy-junk.jpg" alt=""></p>
+<p>The mechanical keyboard switches on the left were wired (via ethernet twisted pairs) to a) the remote for my KVM and b) a jack that I soldered onto the button of the USB switch. I used the remote for the KVM because it was provided by work and I didn&rsquo;t want to make any irreversible changes to the hardware.</p>
+<p>This &hellip; could be better.</p>
+<h1 id="the-new-plan">The New Plan<a href="#the-new-plan" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>First, I bought new KVMs that had a wired remote option. They came with a nice button that wires into the KVM via a standard 3.5mm headphone jack. Easy enough.</p>
+<p>Unfortunately, I couldn&rsquo;t find a (cheap) USB switch with the same option, so I had to add the headphone jack myself.</p>
+<p>The USB switch I bought has a nice big button:</p>
+<p><img src="./usb-switch-inside.jpg" alt=""></p>
+<p>and I could pretty easily wire a jack to the bottom pins of that button:</p>
+<p><img src="./usb-switch-jack.jpg" alt=""></p>
+<p>Doesn&rsquo;t look too bad from the outside, either:</p>
+<p><img src="./usb-switch-jack-complete.jpg" alt=""></p>
+<p>With that completed (x2), I now had four devices (2x KVM, 2x USB switches) that can be activated using a 3.5mm headphone jack. Time to build something that can activate them all remotely.</p>
+<h1 id="hardware">Hardware<a href="#hardware" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>I had a Pi Pico W on hand that was well suited for the task. I added a 4 channel optoisolater in the mix just to isolate all of the devices from the Pico and from eachother. The schematic is pretty straightforward:</p>
+<p><img src="./schematic.png" alt=""></p>
+<p>Digital output pins on the Pico are connected to the anodes on each channel of the optoisolator, with the cathodes connected to ground. On the output side, the tip and sleeve of the barrel jack are connected to the collector and emitter (respectively) of the corresponding photodiode.</p>
+<p>When, for example, GPIO18 on the Pico is low, the LED betweens pins 1 and 2 of the LTV-847 is off, and so the circuit between the tip and sleeve of J1 is open.</p>
+<p>When GPIO18 goes high, the LED turns on and activates the photodiode between pins 15 and 16, closing the circuit between the tip and sleeve of J1 and simulating a button press.</p>
+<p>Here&rsquo;s what it all looks like on a perfboard:</p>
+<p><img src="./perfboard.jpg" alt=""></p>
+<p>I opted to connect the barrel jacks to the perfboard via JST connectors to make assembly easier. As you can see, there&rsquo;s not much to it.</p>
+<p>Slap it all in a 3d printed enclosure, and voilà:</p>
+<p><img src="./enclosure.jpg" alt=""></p>
+<p>I designed the enclosure in FreeCAD. It has four holes in the front for the 3.5mm barrel jacks as well as a cutout in the back for a panel-mount USB cable that gets plugged into the Pico. I used slots and nuts to fasten the perfboard to the enclosure and to attach the lid. This was way nicer than using heat set inserts or something like that.</p>
+<p><img src="./enclosure-cad.png" alt=""></p>
+<h1 id="firmware">Firmware<a href="#firmware" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>The code running on the Pico is simple as well. It connects to WiFi, then connects to an MQTT broker and listens for messages containing the values &ldquo;1&rdquo;, &ldquo;2&rdquo;, &ldquo;3&rdquo;, or &ldquo;4&rdquo; to indicate which jack to turn on and then off.</p>
+<p>I initially wrote the firmware using Micropython. The development experience was &hellip; ok. Thonny is basically a text editor with basic snytax highlighting, so it leaves a lot to be desired.</p>
+<p>Unfortunately, the support for the Pico W&rsquo;s WiFi module seems to be really flaky in Micropython. I decided to swap over to the Arduino framework, and that&rsquo;s been much more reliable.</p>
+<p>Now I just need a convenient way to send MQTT commands to the switcher &hellip; more on that in Part 3.</p>
+<h1 id="resources">Resources<a href="#resources" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>The code, enclosure, and schematic are all on <a href="https://github.com/bitwisebones/switcher">Github</a>.</p>
+
+      </div></div>
+
+  
+
+  
+    
+
+  
+</article>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2025 Powered by <a href="https://gohugo.io">Hugo</a></span>
+    
+      <span>:: <a href="https://github.com/panr/hugo-theme-terminal" target="_blank">Theme</a> made by <a href="https://github.com/panr" target="_blank">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+
+
+
+
+
+<script type="text/javascript" src="/bundle.min.js"></script>
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>

@@ -6,7 +6,120 @@
     <description>Recent content in tech on ascii graves</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 24 Dec 2024 00:00:00 -0500</lastBuildDate><atom:link href="/tags/tech/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 22 Jan 2025 00:00:00 -0400</lastBuildDate><atom:link href="/tags/tech/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Workspace 2025 Part 2: The Switch</title>
+      <link>/posts/workspace-2025-part-2/</link>
+      <pubDate>Wed, 22 Jan 2025 00:00:00 -0400</pubDate>
+      
+      <guid>/posts/workspace-2025-part-2/</guid>
+      <description>As discussed in Part 1, I need the ability to switch the inputs on two KVMs and two USB switches that aren&amp;rsquo;t physically on my desk.
+Previously, I had a hacked together setup to remotely trigger my single KVM and single USB switch:
+The mechanical keyboard switches on the left were wired (via ethernet twisted pairs) to a) the remote for my KVM and b) a jack that I soldered onto the button of the USB switch.</description>
+      <content>&lt;p&gt;As discussed in &lt;a href=&#34;/posts/workspace-2025-part-1/&#34;&gt;Part 1&lt;/a&gt;, I need the ability to switch the inputs on two KVMs and two USB switches that aren&amp;rsquo;t physically on my desk.&lt;/p&gt;
+&lt;p&gt;Previously, I had a hacked together setup to remotely trigger my single KVM and single USB switch:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./messy-junk.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;The mechanical keyboard switches on the left were wired (via ethernet twisted pairs) to a) the remote for my KVM and b) a jack that I soldered onto the button of the USB switch. I used the remote for the KVM because it was provided by work and I didn&amp;rsquo;t want to make any irreversible changes to the hardware.&lt;/p&gt;
+&lt;p&gt;This &amp;hellip; could be better.&lt;/p&gt;
+&lt;h1 id=&#34;the-new-plan&#34;&gt;The New Plan&lt;/h1&gt;
+&lt;p&gt;First, I bought new KVMs that had a wired remote option. They came with a nice button that wires into the KVM via a standard 3.5mm headphone jack. Easy enough.&lt;/p&gt;
+&lt;p&gt;Unfortunately, I couldn&amp;rsquo;t find a (cheap) USB switch with the same option, so I had to add the headphone jack myself.&lt;/p&gt;
+&lt;p&gt;The USB switch I bought has a nice big button:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./usb-switch-inside.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;and I could pretty easily wire a jack to the bottom pins of that button:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./usb-switch-jack.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Doesn&amp;rsquo;t look too bad from the outside, either:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./usb-switch-jack-complete.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;With that completed (x2), I now had four devices (2x KVM, 2x USB switches) that can be activated using a 3.5mm headphone jack. Time to build something that can activate them all remotely.&lt;/p&gt;
+&lt;h1 id=&#34;hardware&#34;&gt;Hardware&lt;/h1&gt;
+&lt;p&gt;I had a Pi Pico W on hand that was well suited for the task. I added a 4 channel optoisolater in the mix just to isolate all of the devices from the Pico and from eachother. The schematic is pretty straightforward:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./schematic.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Digital output pins on the Pico are connected to the anodes on each channel of the optoisolator, with the cathodes connected to ground. On the output side, the tip and sleeve of the barrel jack are connected to the collector and emitter (respectively) of the corresponding photodiode.&lt;/p&gt;
+&lt;p&gt;When, for example, GPIO18 on the Pico is low, the LED betweens pins 1 and 2 of the LTV-847 is off, and so the circuit between the tip and sleeve of J1 is open.&lt;/p&gt;
+&lt;p&gt;When GPIO18 goes high, the LED turns on and activates the photodiode between pins 15 and 16, closing the circuit between the tip and sleeve of J1 and simulating a button press.&lt;/p&gt;
+&lt;p&gt;Here&amp;rsquo;s what it all looks like on a perfboard:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./perfboard.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;I opted to connect the barrel jacks to the perfboard via JST connectors to make assembly easier. As you can see, there&amp;rsquo;s not much to it.&lt;/p&gt;
+&lt;p&gt;Slap it all in a 3d printed enclosure, and voilà:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./enclosure.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;I designed the enclosure in FreeCAD. It has four holes in the front for the 3.5mm barrel jacks as well as a cutout in the back for a panel-mount USB cable that gets plugged into the Pico. I used slots and nuts to fasten the perfboard to the enclosure and to attach the lid. This was way nicer than using heat set inserts or something like that.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./enclosure-cad.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;firmware&#34;&gt;Firmware&lt;/h1&gt;
+&lt;p&gt;The code running on the Pico is simple as well. It connects to WiFi, then connects to an MQTT broker and listens for messages containing the values &amp;ldquo;1&amp;rdquo;, &amp;ldquo;2&amp;rdquo;, &amp;ldquo;3&amp;rdquo;, or &amp;ldquo;4&amp;rdquo; to indicate which jack to turn on and then off.&lt;/p&gt;
+&lt;p&gt;I initially wrote the firmware using Micropython. The development experience was &amp;hellip; ok. Thonny is basically a text editor with basic snytax highlighting, so it leaves a lot to be desired.&lt;/p&gt;
+&lt;p&gt;Unfortunately, the support for the Pico W&amp;rsquo;s WiFi module seems to be really flaky in Micropython. I decided to swap over to the Arduino framework, and that&amp;rsquo;s been much more reliable.&lt;/p&gt;
+&lt;p&gt;Now I just need a convenient way to send MQTT commands to the switcher &amp;hellip; more on that in Part 3.&lt;/p&gt;
+&lt;h1 id=&#34;resources&#34;&gt;Resources&lt;/h1&gt;
+&lt;p&gt;The code, enclosure, and schematic are all on &lt;a href=&#34;https://github.com/bitwisebones/switcher&#34;&gt;Github&lt;/a&gt;.&lt;/p&gt;
+</content>
+    </item>
+    
+    <item>
+      <title>Workspace 2025 Part 1: The Desk</title>
+      <link>/posts/workspace-2025-part-1/</link>
+      <pubDate>Mon, 20 Jan 2025 00:00:00 -0400</pubDate>
+      
+      <guid>/posts/workspace-2025-part-1/</guid>
+      <description>My workspace is a mess. There&amp;rsquo;s so much stuff on my standing desk that it&amp;rsquo;ll no longer stay at standing height - it just slowly &amp;hellip; sinks &amp;hellip; down.
+To remedy this, I want to minimize the amount of stuff on my desk. There are a few fun problems to solve along the way, but first let me show you how it looks today.
+My Desk Today I use my desk for both work and personal activities.</description>
+      <content>&lt;p&gt;My workspace is a mess. There&amp;rsquo;s so much stuff on my standing desk that it&amp;rsquo;ll no longer stay at standing height - it just slowly &amp;hellip; sinks &amp;hellip; down.&lt;/p&gt;
+&lt;p&gt;To remedy this, I want to minimize the amount of stuff on my desk. There are a few fun problems to solve along the way, but first let me show you how it looks today.&lt;/p&gt;
+&lt;h2 id=&#34;my-desk-today&#34;&gt;My Desk Today&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;../personal-pc-setup/2023.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;I use my desk for both work and personal activities. It currently holds (from left to right, roughly):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;My work laptop (and dock) on an arm&lt;/li&gt;
+&lt;li&gt;A KVM under the laptop&lt;/li&gt;
+&lt;li&gt;My main 32&amp;quot; monitor on an arm&lt;/li&gt;
+&lt;li&gt;Speakers under the main montior&lt;/li&gt;
+&lt;li&gt;Keyboard and mouse&lt;/li&gt;
+&lt;li&gt;2x 21&amp;quot; aux monitors on arms&lt;/li&gt;
+&lt;li&gt;My desktop PC&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;the-ideal-desk-of-tomorrow&#34;&gt;The Ideal Desk of Tomorrow&lt;/h2&gt;
+&lt;p&gt;Ideally, I&amp;rsquo;d like my desk to only hold two 32&amp;quot; monitors, keyboard &amp;amp; mouse, webcam, and headset. Both PCs should exist elsewhere with minimal connections to the desk (initially on a shelf, eventually in a rack).&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;d &lt;em&gt;also&lt;/em&gt; like to improve the KVM situation. My current setup uses a single KVM that can switch the monitors back and forth between my work and personal PCs. Instead, I&amp;rsquo;d like to be able to swap the monitors between PCs independently:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Monitor A&lt;/th&gt;
+&lt;th&gt;Monitor B&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;work&lt;/td&gt;
+&lt;td&gt;work&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;personal&lt;/td&gt;
+&lt;td&gt;personal&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;work&lt;/td&gt;
+&lt;td&gt;personal&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;personal&lt;/td&gt;
+&lt;td&gt;work&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;To accomplish this, I&amp;rsquo;ll use two single-monitor KVMs. I&amp;rsquo;d also like to be able to swap my USB devices independently of the monitors, so I&amp;rsquo;ll have a separate USB switch for that purpose. And just to make it a tiny bit more complicated, I want to be able to switch my mouse and keyboard independently from my headset and webcam, so I&amp;rsquo;ll actually have two USB switches.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Q: Why don&amp;rsquo;t use just RDP into your work laptop from your personal PC?&lt;/p&gt;
+&lt;p&gt;A: RDP is disabled on my work laptop :(&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;To recap, here&amp;rsquo;s what the new landscape is:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;desk-diagram.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;And here&amp;rsquo;s what it looks like:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;desk-now.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Now you might notice that the KVMs and USB switchers aren&amp;rsquo;t sitting on the desk, so how am I going to swap between them?&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;That&lt;/em&gt; is the topic of Part 2: &lt;a href=&#34;/posts/workspace-2025-part-2/&#34;&gt;The Switch&lt;/a&gt;.&lt;/p&gt;
+</content>
+    </item>
+    
     <item>
       <title>Shelly H&amp;T Gen3 Integration</title>
       <link>/posts/shelly-ht-gen3/</link>

@@ -3,21 +3,33 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>/</loc>
-    <lastmod>2024-12-24T00:00:00-05:00</lastmod>
+    <lastmod>2025-01-22T00:00:00-04:00</lastmod>
+  </url><url>
+    <loc>/tags/diy/</loc>
+    <lastmod>2025-01-22T00:00:00-04:00</lastmod>
+  </url><url>
+    <loc>/tags/electronics/</loc>
+    <lastmod>2025-01-22T00:00:00-04:00</lastmod>
+  </url><url>
+    <loc>/posts/</loc>
+    <lastmod>2025-01-22T00:00:00-04:00</lastmod>
+  </url><url>
+    <loc>/tags/</loc>
+    <lastmod>2025-01-22T00:00:00-04:00</lastmod>
+  </url><url>
+    <loc>/tags/tech/</loc>
+    <lastmod>2025-01-22T00:00:00-04:00</lastmod>
+  </url><url>
+    <loc>/posts/workspace-2025-part-2/</loc>
+    <lastmod>2025-01-22T00:00:00-04:00</lastmod>
+  </url><url>
+    <loc>/posts/workspace-2025-part-1/</loc>
+    <lastmod>2025-01-20T00:00:00-04:00</lastmod>
   </url><url>
     <loc>/tags/iot/</loc>
     <lastmod>2024-12-24T00:00:00-05:00</lastmod>
   </url><url>
-    <loc>/posts/</loc>
-    <lastmod>2024-12-24T00:00:00-05:00</lastmod>
-  </url><url>
     <loc>/posts/shelly-ht-gen3/</loc>
-    <lastmod>2024-12-24T00:00:00-05:00</lastmod>
-  </url><url>
-    <loc>/tags/</loc>
-    <lastmod>2024-12-24T00:00:00-05:00</lastmod>
-  </url><url>
-    <loc>/tags/tech/</loc>
     <lastmod>2024-12-24T00:00:00-05:00</lastmod>
   </url><url>
     <loc>/posts/selfhosted-2024/</loc>
@@ -25,9 +37,6 @@
   </url><url>
     <loc>/tags/selfhosting/</loc>
     <lastmod>2024-12-21T00:00:00-05:00</lastmod>
-  </url><url>
-    <loc>/tags/diy/</loc>
-    <lastmod>2024-09-24T00:00:00-05:00</lastmod>
   </url><url>
     <loc>/posts/tool-roll/</loc>
     <lastmod>2024-09-24T00:00:00-05:00</lastmod>
@@ -40,9 +49,6 @@
   </url><url>
     <loc>/posts/nds-homebrew-setup/</loc>
     <lastmod>2024-07-01T12:15:03-05:00</lastmod>
-  </url><url>
-    <loc>/tags/electronics/</loc>
-    <lastmod>2024-02-29T06:00:00-05:00</lastmod>
   </url><url>
     <loc>/posts/nuvu-meter/</loc>
     <lastmod>2024-02-29T06:00:00-05:00</lastmod>

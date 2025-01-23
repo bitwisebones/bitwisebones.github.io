@@ -6,7 +6,54 @@
     <description>Recent content in diy on ascii graves</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 24 Sep 2024 00:00:00 -0500</lastBuildDate><atom:link href="/tags/diy/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 22 Jan 2025 00:00:00 -0400</lastBuildDate><atom:link href="/tags/diy/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Workspace 2025 Part 2: The Switch</title>
+      <link>/posts/workspace-2025-part-2/</link>
+      <pubDate>Wed, 22 Jan 2025 00:00:00 -0400</pubDate>
+      
+      <guid>/posts/workspace-2025-part-2/</guid>
+      <description>As discussed in Part 1, I need the ability to switch the inputs on two KVMs and two USB switches that aren&amp;rsquo;t physically on my desk.
+Previously, I had a hacked together setup to remotely trigger my single KVM and single USB switch:
+The mechanical keyboard switches on the left were wired (via ethernet twisted pairs) to a) the remote for my KVM and b) a jack that I soldered onto the button of the USB switch.</description>
+      <content>&lt;p&gt;As discussed in &lt;a href=&#34;/posts/workspace-2025-part-1/&#34;&gt;Part 1&lt;/a&gt;, I need the ability to switch the inputs on two KVMs and two USB switches that aren&amp;rsquo;t physically on my desk.&lt;/p&gt;
+&lt;p&gt;Previously, I had a hacked together setup to remotely trigger my single KVM and single USB switch:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./messy-junk.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;The mechanical keyboard switches on the left were wired (via ethernet twisted pairs) to a) the remote for my KVM and b) a jack that I soldered onto the button of the USB switch. I used the remote for the KVM because it was provided by work and I didn&amp;rsquo;t want to make any irreversible changes to the hardware.&lt;/p&gt;
+&lt;p&gt;This &amp;hellip; could be better.&lt;/p&gt;
+&lt;h1 id=&#34;the-new-plan&#34;&gt;The New Plan&lt;/h1&gt;
+&lt;p&gt;First, I bought new KVMs that had a wired remote option. They came with a nice button that wires into the KVM via a standard 3.5mm headphone jack. Easy enough.&lt;/p&gt;
+&lt;p&gt;Unfortunately, I couldn&amp;rsquo;t find a (cheap) USB switch with the same option, so I had to add the headphone jack myself.&lt;/p&gt;
+&lt;p&gt;The USB switch I bought has a nice big button:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./usb-switch-inside.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;and I could pretty easily wire a jack to the bottom pins of that button:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./usb-switch-jack.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Doesn&amp;rsquo;t look too bad from the outside, either:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./usb-switch-jack-complete.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;With that completed (x2), I now had four devices (2x KVM, 2x USB switches) that can be activated using a 3.5mm headphone jack. Time to build something that can activate them all remotely.&lt;/p&gt;
+&lt;h1 id=&#34;hardware&#34;&gt;Hardware&lt;/h1&gt;
+&lt;p&gt;I had a Pi Pico W on hand that was well suited for the task. I added a 4 channel optoisolater in the mix just to isolate all of the devices from the Pico and from eachother. The schematic is pretty straightforward:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./schematic.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Digital output pins on the Pico are connected to the anodes on each channel of the optoisolator, with the cathodes connected to ground. On the output side, the tip and sleeve of the barrel jack are connected to the collector and emitter (respectively) of the corresponding photodiode.&lt;/p&gt;
+&lt;p&gt;When, for example, GPIO18 on the Pico is low, the LED betweens pins 1 and 2 of the LTV-847 is off, and so the circuit between the tip and sleeve of J1 is open.&lt;/p&gt;
+&lt;p&gt;When GPIO18 goes high, the LED turns on and activates the photodiode between pins 15 and 16, closing the circuit between the tip and sleeve of J1 and simulating a button press.&lt;/p&gt;
+&lt;p&gt;Here&amp;rsquo;s what it all looks like on a perfboard:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./perfboard.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;I opted to connect the barrel jacks to the perfboard via JST connectors to make assembly easier. As you can see, there&amp;rsquo;s not much to it.&lt;/p&gt;
+&lt;p&gt;Slap it all in a 3d printed enclosure, and voilà:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./enclosure.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;I designed the enclosure in FreeCAD. It has four holes in the front for the 3.5mm barrel jacks as well as a cutout in the back for a panel-mount USB cable that gets plugged into the Pico. I used slots and nuts to fasten the perfboard to the enclosure and to attach the lid. This was way nicer than using heat set inserts or something like that.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./enclosure-cad.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;firmware&#34;&gt;Firmware&lt;/h1&gt;
+&lt;p&gt;The code running on the Pico is simple as well. It connects to WiFi, then connects to an MQTT broker and listens for messages containing the values &amp;ldquo;1&amp;rdquo;, &amp;ldquo;2&amp;rdquo;, &amp;ldquo;3&amp;rdquo;, or &amp;ldquo;4&amp;rdquo; to indicate which jack to turn on and then off.&lt;/p&gt;
+&lt;p&gt;I initially wrote the firmware using Micropython. The development experience was &amp;hellip; ok. Thonny is basically a text editor with basic snytax highlighting, so it leaves a lot to be desired.&lt;/p&gt;
+&lt;p&gt;Unfortunately, the support for the Pico W&amp;rsquo;s WiFi module seems to be really flaky in Micropython. I decided to swap over to the Arduino framework, and that&amp;rsquo;s been much more reliable.&lt;/p&gt;
+&lt;p&gt;Now I just need a convenient way to send MQTT commands to the switcher &amp;hellip; more on that in Part 3.&lt;/p&gt;
+&lt;h1 id=&#34;resources&#34;&gt;Resources&lt;/h1&gt;
+&lt;p&gt;The code, enclosure, and schematic are all on &lt;a href=&#34;https://github.com/bitwisebones/switcher&#34;&gt;Github&lt;/a&gt;.&lt;/p&gt;
+</content>
+    </item>
+    
     <item>
       <title>DIY Tool Roll</title>
       <link>/posts/tool-roll/</link>
